@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://gatherloop.github.io/gatherloop/sitemap-index.xml
