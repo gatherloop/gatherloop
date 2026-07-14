@@ -1,0 +1,84 @@
+---
+import faqItems from "../data/faq.json";
+---
+
+<section class="faq" aria-label="Pertanyaan yang Sering Ditanyakan">
+  <h2 class="section-title">Pertanyaan yang Sering Ditanyakan</h2>
+  <div class="faq-list">
+    {
+      faqItems.map((item) => (
+        <details class="faq-item">
+          <summary class="faq-question">
+            <span>{item.question}</span>
+            <span class="faq-icon" aria-hidden="true" />
+          </summary>
+          <p class="faq-answer">{item.answer}</p>
+        </details>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .faq {
+    margin-top: 2.5rem;
+  }
+
+  .section-title {
+    font-size: 1.375rem;
+    margin-bottom: 1rem;
+  }
+
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .faq-item {
+    border-radius: var(--radius-lg);
+    background: #fff;
+    box-shadow: var(--shadow-card);
+    overflow: hidden;
+  }
+
+  .faq-question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    min-height: 48px;
+    padding: 0.875rem 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .faq-question::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-question:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: -2px;
+  }
+
+  .faq-icon {
+    flex-shrink: 0;
+    width: 12px;
+    height: 12px;
+    border-right: 2px solid var(--color-accent);
+    border-bottom: 2px solid var(--color-accent);
+    transform: rotate(45deg);
+    transition: transform 0.2s ease;
+  }
+
+  .faq-item[open] .faq-icon {
+    transform: rotate(-135deg);
+  }
+
+  .faq-answer {
+    padding: 0 1rem 1rem;
+    opacity: 0.85;
+  }
+</style>
