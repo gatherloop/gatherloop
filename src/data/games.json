@@ -6,7 +6,9 @@
     "maxDurationMinutes": 60,
     "minPlayers": 2,
     "maxPlayers": 4,
-    "minAge": 10
+    "minAge": 10,
+    "tags": ["adu strategi"],
+    "shelfName": "Rak A"
   },
   {
     "title": "Uno",
@@ -15,7 +17,9 @@
     "maxDurationMinutes": 30,
     "minPlayers": 2,
     "maxPlayers": 10,
-    "minAge": 7
+    "minAge": 7,
+    "tags": ["adu cepat", "game keluarga"],
+    "shelfName": "Rak B"
   },
   {
     "title": "Monopoli",
@@ -24,7 +28,9 @@
     "maxDurationMinutes": 180,
     "minPlayers": 2,
     "maxPlayers": 6,
-    "minAge": 8
+    "minAge": 8,
+    "tags": ["adu strategi", "game keluarga"],
+    "shelfName": "Rak B"
   },
   {
     "title": "Catan",
@@ -33,7 +39,9 @@
     "maxDurationMinutes": 120,
     "minPlayers": 3,
     "maxPlayers": 4,
-    "minAge": 10
+    "minAge": 10,
+    "tags": ["adu strategi"],
+    "shelfName": "Rak A"
   },
   {
     "title": "Dixit",
@@ -42,7 +50,9 @@
     "maxDurationMinutes": 45,
     "minPlayers": 3,
     "maxPlayers": 6,
-    "minAge": 8
+    "minAge": 8,
+    "tags": ["game keluarga"],
+    "shelfName": "Rak B"
   },
   {
     "title": "Werewolf",
@@ -51,7 +61,9 @@
     "maxDurationMinutes": 45,
     "minPlayers": 8,
     "maxPlayers": 18,
-    "minAge": 10
+    "minAge": 10,
+    "tags": ["party game"],
+    "shelfName": "Rak C"
   },
   {
     "title": "Codenames",
@@ -60,7 +72,9 @@
     "maxDurationMinutes": 30,
     "minPlayers": 4,
     "maxPlayers": 8,
-    "minAge": 14
+    "minAge": 14,
+    "tags": ["adu ketelitian", "party game", "kerja sama tim"],
+    "shelfName": "Rak C"
   },
   {
     "title": "Jenga",
@@ -69,6 +83,8 @@
     "maxDurationMinutes": 30,
     "minPlayers": 2,
     "maxPlayers": 8,
-    "minAge": 6
+    "minAge": 6,
+    "tags": ["adu cepat", "adu ketelitian"],
+    "shelfName": "Rak D"
   }
 ]

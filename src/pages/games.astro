@@ -6,7 +6,7 @@ import GameCard from "../components/GameCard.astro";
 import games from "../data/games.json";
 import type { Game } from "../types";
 
-const gameList = games as Game[];
+const gameList = games satisfies Game[];
 ---
 
 <Layout
