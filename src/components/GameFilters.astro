@@ -37,6 +37,49 @@ const shelves = [...new Set(gameList.map((game) => game.shelfName))].sort((a, b)
     </div>
   </div>
   <div class="filter-field">
+    <label for="filter-players" class="filter-label">Jumlah pemain</label>
+    <input
+      type="number"
+      inputmode="numeric"
+      min="1"
+      id="filter-players"
+      name="pemain"
+      class="filter-input"
+      placeholder="mis. 5"
+    />
+  </div>
+  <div class="filter-field">
+    <span class="filter-label" id="filter-duration-label">Durasi</span>
+    <div
+      class="filter-chips"
+      role="group"
+      aria-labelledby="filter-duration-label"
+      id="filter-duration"
+    >
+      <button type="button" class="filter-chip" data-duration="0-30" aria-pressed="false">
+        ≤ 30 menit
+      </button>
+      <button type="button" class="filter-chip" data-duration="30-60" aria-pressed="false">
+        30–60 menit
+      </button>
+      <button type="button" class="filter-chip" data-duration="60-" aria-pressed="false">
+        &gt; 60 menit
+      </button>
+    </div>
+  </div>
+  <div class="filter-field">
+    <label for="filter-age" class="filter-label">Usia pemain termuda</label>
+    <input
+      type="number"
+      inputmode="numeric"
+      min="0"
+      id="filter-age"
+      name="usia"
+      class="filter-input"
+      placeholder="mis. 8"
+    />
+  </div>
+  <div class="filter-field">
     <label for="filter-shelf" class="filter-label">Lokasi rak</label>
     <select id="filter-shelf" name="shelf" class="filter-select">
       <option value="">Semua rak</option>
@@ -55,18 +98,36 @@ const shelves = [...new Set(gameList.map((game) => game.shelfName))].sort((a, b)
   const tagButtons = Array.from(
     document.querySelectorAll<HTMLButtonElement>("#filter-tags .filter-chip"),
   );
+  const playersInput = document.getElementById("filter-players") as HTMLInputElement | null;
+  const durationButtons = Array.from(
+    document.querySelectorAll<HTMLButtonElement>("#filter-duration .filter-chip"),
+  );
+  const ageInput = document.getElementById("filter-age") as HTMLInputElement | null;
   const shelfSelect = document.getElementById("filter-shelf") as HTMLSelectElement | null;
   const resetButton = document.getElementById("filter-reset");
   const countEl = document.getElementById("filter-count");
   const emptyEl = document.getElementById("filter-empty");
   const grid = document.getElementById("game-grid");
 
-  if (panel && titleInput && shelfSelect && resetButton && countEl && emptyEl && grid) {
+  if (
+    panel &&
+    titleInput &&
+    playersInput &&
+    ageInput &&
+    shelfSelect &&
+    resetButton &&
+    countEl &&
+    emptyEl &&
+    grid
+  ) {
     const cards = Array.from(grid.querySelectorAll<HTMLElement>(".game-card"));
     const total = cards.length;
 
     let title = "";
     const selectedTags = new Set<string>();
+    let players: number | null = null;
+    let duration: { min: number; max: number } | null = null;
+    let age: number | null = null;
     let shelf = "";
     let debounceTimer: ReturnType<typeof setTimeout> | undefined;
 
@@ -77,8 +138,23 @@ const shelves = [...new Set(gameList.map((game) => game.shelfName))].sort((a, b)
         const matchesTitle = !title || (card.dataset.title ?? "").includes(title);
         const matchesTags =
           selectedTags.size === 0 || cardTags.some((tag) => selectedTags.has(tag));
+        const matchesPlayers =
+          players === null ||
+          (players >= Number(card.dataset.minPlayers) &&
+            players <= Number(card.dataset.maxPlayers));
+        const matchesDuration =
+          duration === null ||
+          (Number(card.dataset.maxDuration) >= duration.min &&
+            Number(card.dataset.minDuration) <= duration.max);
+        const matchesAge = age === null || Number(card.dataset.minAge) <= age;
         const matchesShelf = !shelf || card.dataset.shelf === shelf;
-        const matches = matchesTitle && matchesTags && matchesShelf;
+        const matches =
+          matchesTitle &&
+          matchesTags &&
+          matchesPlayers &&
+          matchesDuration &&
+          matchesAge &&
+          matchesShelf;
         card.hidden = !matches;
         if (matches) visible++;
       }
@@ -86,7 +162,13 @@ const shelves = [...new Set(gameList.map((game) => game.shelfName))].sort((a, b)
       countEl!.textContent =
         visible === total ? `${total} game` : `Menampilkan ${visible} dari ${total} game`;
       emptyEl!.hidden = visible !== 0;
-      resetButton!.hidden = title === "" && selectedTags.size === 0 && shelf === "";
+      resetButton!.hidden =
+        title === "" &&
+        selectedTags.size === 0 &&
+        players === null &&
+        duration === null &&
+        age === null &&
+        shelf === "";
     }
 
     titleInput.addEventListener("input", () => {
@@ -111,6 +193,40 @@ const shelves = [...new Set(gameList.map((game) => game.shelfName))].sort((a, b)
       });
     }
 
+    playersInput.addEventListener("input", () => {
+      const value = playersInput.value.trim();
+      players = value === "" ? null : Number(value);
+      if (players !== null && !Number.isFinite(players)) players = null;
+      render();
+    });
+
+    for (const button of durationButtons) {
+      button.addEventListener("click", () => {
+        const pressed = button.getAttribute("aria-pressed") === "true";
+        for (const other of durationButtons) {
+          other.setAttribute("aria-pressed", "false");
+        }
+        if (pressed) {
+          duration = null;
+        } else {
+          button.setAttribute("aria-pressed", "true");
+          const [minRaw, maxRaw] = (button.dataset.duration ?? "").split("-");
+          duration = {
+            min: Number(minRaw),
+            max: maxRaw === "" ? Infinity : Number(maxRaw),
+          };
+        }
+        render();
+      });
+    }
+
+    ageInput.addEventListener("input", () => {
+      const value = ageInput.value.trim();
+      age = value === "" ? null : Number(value);
+      if (age !== null && !Number.isFinite(age)) age = null;
+      render();
+    });
+
     shelfSelect.addEventListener("change", () => {
       shelf = shelfSelect.value;
       render();
@@ -124,6 +240,14 @@ const shelves = [...new Set(gameList.map((game) => game.shelfName))].sort((a, b)
       for (const button of tagButtons) {
         button.setAttribute("aria-pressed", "false");
       }
+      playersInput.value = "";
+      players = null;
+      for (const button of durationButtons) {
+        button.setAttribute("aria-pressed", "false");
+      }
+      duration = null;
+      ageInput.value = "";
+      age = null;
       shelfSelect.value = "";
       shelf = "";
       render();
