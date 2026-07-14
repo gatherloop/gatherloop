@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import Footer from "../components/Footer.astro";
 import BackLink from "../components/BackLink.astro";
 import GameCard from "../components/GameCard.astro";
+import GameFilters from "../components/GameFilters.astro";
 import games from "../data/games.json";
 import type { Game } from "../types";
 
@@ -16,9 +17,13 @@ const gameList = games satisfies Game[];
   <main>
     <BackLink />
     <h1 class="page-title">Koleksi Game</h1>
-    <div class="game-grid">
+    <GameFilters />
+    <div class="game-grid" id="game-grid">
       {gameList.map((game) => <GameCard game={game} />)}
     </div>
+    <p id="filter-empty" class="filter-empty" hidden>
+      Tidak ada game yang cocok dengan filternya. Coba ubah atau reset filternya ya.
+    </p>
   </main>
   <Footer />
 </Layout>
@@ -40,5 +45,11 @@ const gameList = games satisfies Game[];
     .game-grid {
       grid-template-columns: repeat(2, 1fr);
     }
+  }
+
+  .filter-empty {
+    margin-top: 1.5rem;
+    text-align: center;
+    opacity: 0.85;
   }
 </style>

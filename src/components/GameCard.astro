@@ -14,7 +14,17 @@ const players = formatPlayers(game.minPlayers, game.maxPlayers);
 const age = formatAge(game.minAge);
 ---
 
-<article class="game-card">
+<article
+  class="game-card"
+  data-title={game.title.toLowerCase()}
+  data-tags={game.tags.join(",")}
+  data-min-players={game.minPlayers}
+  data-max-players={game.maxPlayers}
+  data-min-duration={game.minDurationMinutes}
+  data-max-duration={game.maxDurationMinutes}
+  data-min-age={game.minAge}
+  data-shelf={game.shelfName}
+>
   <img
     class="game-image"
     src={withBase(game.image)}
@@ -45,6 +55,10 @@ const age = formatAge(game.minAge);
     border-radius: var(--radius-lg);
     background: #fff;
     box-shadow: var(--shadow-card);
+  }
+
+  .game-card[hidden] {
+    display: none;
   }
 
   .game-image {
