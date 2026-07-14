@@ -9,7 +9,7 @@ interface Props {
 }
 
 const { title = SITE_TITLE, description = SITE_DESCRIPTION } = Astro.props;
-const faviconHref = withBase("/favicon.svg");
+const faviconHref = withBase("/favicon.png");
 const ogImageUrl = new URL(withBase("/images/og-image.png"), Astro.site);
 ---
 
@@ -18,7 +18,7 @@ const ogImageUrl = new URL(withBase("/images/og-image.png"), Astro.site);
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/svg+xml" href={faviconHref} />
+    <link rel="icon" type="image/png" href={faviconHref} />
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={Astro.url} />
