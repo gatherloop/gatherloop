@@ -1,0 +1,18 @@
+---
+import { withBase } from "../utils/url";
+---
+
+<a class="back-link" href={withBase("/")}>
+  <span aria-hidden="true">‹</span> Kembali
+</a>
+
+<style>
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    margin-top: 1.5rem;
+    font-weight: 700;
+    text-decoration: none;
+  }
+</style>
