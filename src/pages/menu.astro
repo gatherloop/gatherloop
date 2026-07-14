@@ -1,0 +1,65 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Footer from "../components/Footer.astro";
+import BackLink from "../components/BackLink.astro";
+import { withBase } from "../utils/url";
+
+// Add or remove entries to change how many menu pages are shown — no other code
+// change needed. Each `src` file lives in public/images/menu/.
+const menuImages = [
+  {
+    src: "/images/menu/menu-placeholder-1.svg",
+    alt: "Menu makanan dan minuman Gatherloop — halaman 1",
+  },
+  {
+    src: "/images/menu/menu-placeholder-2.svg",
+    alt: "Menu makanan dan minuman Gatherloop — halaman 2",
+  },
+];
+---
+
+<Layout
+  title="Menu Makanan & Minuman — Gatherloop"
+  description="Menu makanan dan minuman yang tersedia di Gatherloop, board game cafe di Kraksaan, Probolinggo."
+>
+  <main>
+    <BackLink />
+    <h1 class="page-title">Menu Makanan &amp; Minuman</h1>
+    <div class="menu-images">
+      {
+        menuImages.map((image) => (
+          <img
+            class="menu-image"
+            src={withBase(image.src)}
+            alt={image.alt}
+            width="480"
+            height="640"
+            loading="lazy"
+          />
+        ))
+      }
+    </div>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .page-title {
+    margin-top: 1rem;
+    font-size: 1.5rem;
+  }
+
+  .menu-images {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .menu-image {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+  }
+</style>

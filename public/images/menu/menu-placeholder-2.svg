@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 640" role="img" aria-hidden="true">
+  <rect x="1" y="1" width="478" height="638" rx="24" fill="#FAF6F0" stroke="#E4DCCF" stroke-width="2" />
+
+  <rect x="24" y="24" width="432" height="72" rx="16" fill="#1F6F54" />
+  <text x="240" y="70" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="26" fill="#FAF6F0">
+    Menu — Halaman 2
+  </text>
+
+  <rect x="24" y="120" width="220" height="18" rx="9" fill="#26221D" opacity="0.7" />
+  <rect x="24" y="152" width="432" height="1" fill="#E4DCCF" />
+
+  <!-- item row 1 -->
+  <rect x="24" y="176" width="240" height="16" rx="8" fill="#26221D" opacity="0.7" />
+  <rect x="24" y="200" width="150" height="12" rx="6" fill="#26221D" opacity="0.4" />
+  <rect x="382" y="180" width="74" height="24" rx="12" fill="#1F6F54" />
+  <text x="419" y="197" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#FAF6F0">Rp —</text>
+
+  <!-- item row 2 -->
+  <rect x="24" y="236" width="270" height="16" rx="8" fill="#26221D" opacity="0.7" />
+  <rect x="24" y="260" width="130" height="12" rx="6" fill="#26221D" opacity="0.4" />
+  <rect x="382" y="240" width="74" height="24" rx="12" fill="#1F6F54" />
+  <text x="419" y="257" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#FAF6F0">Rp —</text>
+
+  <!-- item row 3 -->
+  <rect x="24" y="296" width="200" height="16" rx="8" fill="#26221D" opacity="0.7" />
+  <rect x="24" y="320" width="160" height="12" rx="6" fill="#26221D" opacity="0.4" />
+  <rect x="382" y="300" width="74" height="24" rx="12" fill="#1F6F54" />
+  <text x="419" y="317" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#FAF6F0">Rp —</text>
+
+  <text x="240" y="580" text-anchor="middle" font-family="sans-serif" font-size="16" fill="#26221D" opacity="0.5">
+    Placeholder menu makanan &amp; minuman
+  </text>
+  <text x="240" y="604" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#26221D" opacity="0.4">
+    (ganti dengan foto menu asli)
+  </text>
+</svg>
