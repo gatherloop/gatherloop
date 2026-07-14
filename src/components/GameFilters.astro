@@ -24,71 +24,81 @@ const shelves = [...new Set(gameList.map((game) => game.shelfName))].sort((a, b)
       autocomplete="off"
     />
   </div>
-  <div class="filter-field">
-    <span class="filter-label" id="filter-tags-label">Tag</span>
-    <div class="filter-chips" role="group" aria-labelledby="filter-tags-label" id="filter-tags">
-      {
-        tags.map((tag) => (
-          <button type="button" class="filter-chip" data-tag={tag} aria-pressed="false">
-            {tag}
-          </button>
-        ))
-      }
-    </div>
+  <div class="filter-toolbar">
+    <details class="filter-disclosure" id="filter-disclosure">
+      <summary class="filter-disclosure-summary">
+        <span id="filter-disclosure-label">Filter</span>
+        <span class="filter-disclosure-icon" aria-hidden="true"></span>
+      </summary>
+      <div class="filter-disclosure-content">
+        <div class="filter-field">
+          <span class="filter-label" id="filter-tags-label">Tag</span>
+          <div class="filter-chips" role="group" aria-labelledby="filter-tags-label" id="filter-tags">
+            {
+              tags.map((tag) => (
+                <button type="button" class="filter-chip" data-tag={tag} aria-pressed="false">
+                  {tag}
+                </button>
+              ))
+            }
+          </div>
+        </div>
+        <div class="filter-field">
+          <label for="filter-players" class="filter-label">Jumlah pemain</label>
+          <input
+            type="number"
+            inputmode="numeric"
+            min="1"
+            id="filter-players"
+            name="pemain"
+            class="filter-input"
+            placeholder="mis. 5"
+          />
+        </div>
+        <div class="filter-field">
+          <span class="filter-label" id="filter-duration-label">Durasi</span>
+          <div
+            class="filter-chips"
+            role="group"
+            aria-labelledby="filter-duration-label"
+            id="filter-duration"
+          >
+            <button type="button" class="filter-chip" data-duration="0-30" aria-pressed="false">
+              ≤ 30 menit
+            </button>
+            <button type="button" class="filter-chip" data-duration="30-60" aria-pressed="false">
+              30–60 menit
+            </button>
+            <button type="button" class="filter-chip" data-duration="60-" aria-pressed="false">
+              &gt; 60 menit
+            </button>
+          </div>
+        </div>
+        <div class="filter-field">
+          <label for="filter-age" class="filter-label">Usia pemain termuda</label>
+          <input
+            type="number"
+            inputmode="numeric"
+            min="0"
+            id="filter-age"
+            name="usia"
+            class="filter-input"
+            placeholder="mis. 8"
+          />
+        </div>
+        <div class="filter-field">
+          <label for="filter-shelf" class="filter-label">Lokasi rak</label>
+          <select id="filter-shelf" name="shelf" class="filter-select">
+            <option value="">Semua rak</option>
+            {shelves.map((shelf) => <option value={shelf}>{shelf}</option>)}
+          </select>
+        </div>
+      </div>
+    </details>
+    <button type="button" id="filter-reset" class="filter-reset" hidden>
+      Reset filter
+    </button>
   </div>
-  <div class="filter-field">
-    <label for="filter-players" class="filter-label">Jumlah pemain</label>
-    <input
-      type="number"
-      inputmode="numeric"
-      min="1"
-      id="filter-players"
-      name="pemain"
-      class="filter-input"
-      placeholder="mis. 5"
-    />
-  </div>
-  <div class="filter-field">
-    <span class="filter-label" id="filter-duration-label">Durasi</span>
-    <div
-      class="filter-chips"
-      role="group"
-      aria-labelledby="filter-duration-label"
-      id="filter-duration"
-    >
-      <button type="button" class="filter-chip" data-duration="0-30" aria-pressed="false">
-        ≤ 30 menit
-      </button>
-      <button type="button" class="filter-chip" data-duration="30-60" aria-pressed="false">
-        30–60 menit
-      </button>
-      <button type="button" class="filter-chip" data-duration="60-" aria-pressed="false">
-        &gt; 60 menit
-      </button>
-    </div>
-  </div>
-  <div class="filter-field">
-    <label for="filter-age" class="filter-label">Usia pemain termuda</label>
-    <input
-      type="number"
-      inputmode="numeric"
-      min="0"
-      id="filter-age"
-      name="usia"
-      class="filter-input"
-      placeholder="mis. 8"
-    />
-  </div>
-  <div class="filter-field">
-    <label for="filter-shelf" class="filter-label">Lokasi rak</label>
-    <select id="filter-shelf" name="shelf" class="filter-select">
-      <option value="">Semua rak</option>
-      {shelves.map((shelf) => <option value={shelf}>{shelf}</option>)}
-    </select>
-  </div>
-  <button type="button" id="filter-reset" class="filter-reset" hidden>
-    Reset filter
-  </button>
 </section>
 <p id="filter-count" class="filter-count" aria-live="polite" hidden></p>
 
@@ -108,6 +118,8 @@ const shelves = [...new Set(gameList.map((game) => game.shelfName))].sort((a, b)
   const countEl = document.getElementById("filter-count");
   const emptyEl = document.getElementById("filter-empty");
   const grid = document.getElementById("game-grid");
+  const disclosure = document.getElementById("filter-disclosure") as HTMLDetailsElement | null;
+  const disclosureLabel = document.getElementById("filter-disclosure-label");
 
   if (
     panel &&
@@ -118,10 +130,14 @@ const shelves = [...new Set(gameList.map((game) => game.shelfName))].sort((a, b)
     resetButton &&
     countEl &&
     emptyEl &&
-    grid
+    grid &&
+    disclosure &&
+    disclosureLabel
   ) {
     const cards = Array.from(grid.querySelectorAll<HTMLElement>(".game-card"));
     const total = cards.length;
+    const validTags = new Set(tagButtons.map((button) => button.dataset.tag ?? ""));
+    const validShelves = new Set(Array.from(shelfSelect.options).map((option) => option.value));
 
     let title = "";
     const selectedTags = new Set<string>();
@@ -130,6 +146,74 @@ const shelves = [...new Set(gameList.map((game) => game.shelfName))].sort((a, b)
     let age: number | null = null;
     let shelf = "";
     let debounceTimer: ReturnType<typeof setTimeout> | undefined;
+
+    function parsePositiveInt(value: string | null): number | null {
+      if (value === null || value.trim() === "") return null;
+      const n = Number(value);
+      return Number.isFinite(n) ? n : null;
+    }
+
+    function initFromQuery() {
+      const params = new URLSearchParams(location.search);
+
+      const titleParam = params.get("judul");
+      if (titleParam) {
+        titleInput!.value = titleParam;
+        title = titleParam.trim().toLowerCase();
+      }
+
+      for (const tag of params.getAll("tag")) {
+        if (validTags.has(tag)) selectedTags.add(tag);
+      }
+      for (const button of tagButtons) {
+        if (selectedTags.has(button.dataset.tag ?? "")) {
+          button.setAttribute("aria-pressed", "true");
+        }
+      }
+
+      const pemainParam = parsePositiveInt(params.get("pemain"));
+      if (pemainParam !== null) {
+        players = pemainParam;
+        playersInput!.value = String(pemainParam);
+      }
+
+      const durasiParam = params.get("durasi");
+      const durationButton = durationButtons.find((b) => b.dataset.duration === durasiParam);
+      if (durasiParam && durationButton) {
+        const [minRaw, maxRaw] = durasiParam.split("-");
+        duration = { min: Number(minRaw), max: maxRaw === "" ? Infinity : Number(maxRaw) };
+        durationButton.setAttribute("aria-pressed", "true");
+      }
+
+      const usiaParam = parsePositiveInt(params.get("usia"));
+      if (usiaParam !== null) {
+        age = usiaParam;
+        ageInput!.value = String(usiaParam);
+      }
+
+      const rakParam = params.get("rak");
+      if (rakParam && validShelves.has(rakParam)) {
+        shelf = rakParam;
+        shelfSelect!.value = rakParam;
+      }
+    }
+
+    function syncUrl() {
+      const params = new URLSearchParams();
+      if (titleInput!.value.trim()) params.set("judul", titleInput!.value.trim());
+      for (const tag of selectedTags) params.append("tag", tag);
+      if (players !== null) params.set("pemain", String(players));
+      const activeDurationButton = durationButtons.find(
+        (b) => b.getAttribute("aria-pressed") === "true",
+      );
+      if (activeDurationButton) params.set("durasi", activeDurationButton.dataset.duration ?? "");
+      if (age !== null) params.set("usia", String(age));
+      if (shelf) params.set("rak", shelf);
+
+      const query = params.toString();
+      const url = `${location.pathname}${query ? `?${query}` : ""}`;
+      history.replaceState(null, "", url);
+    }
 
     function render() {
       let visible = 0;
@@ -162,13 +246,18 @@ const shelves = [...new Set(gameList.map((game) => game.shelfName))].sort((a, b)
       countEl!.textContent =
         visible === total ? `${total} game` : `Menampilkan ${visible} dari ${total} game`;
       emptyEl!.hidden = visible !== 0;
-      resetButton!.hidden =
-        title === "" &&
-        selectedTags.size === 0 &&
-        players === null &&
-        duration === null &&
-        age === null &&
-        shelf === "";
+
+      const activeCount =
+        (selectedTags.size > 0 ? 1 : 0) +
+        (players !== null ? 1 : 0) +
+        (duration !== null ? 1 : 0) +
+        (age !== null ? 1 : 0) +
+        (shelf !== "" ? 1 : 0);
+      disclosureLabel!.textContent = activeCount > 0 ? `Filter (${activeCount})` : "Filter";
+
+      resetButton!.hidden = title === "" && activeCount === 0;
+
+      syncUrl();
     }
 
     titleInput.addEventListener("input", () => {
@@ -254,6 +343,18 @@ const shelves = [...new Set(gameList.map((game) => game.shelfName))].sort((a, b)
       titleInput.focus();
     });
 
+    let disclosureManuallyToggled = false;
+    disclosure.querySelector("summary")?.addEventListener("click", () => {
+      disclosureManuallyToggled = true;
+    });
+    const desktopQuery = window.matchMedia("(min-width: 768px)");
+    function syncDisclosureDefault() {
+      if (!disclosureManuallyToggled) disclosure!.open = desktopQuery.matches;
+    }
+    desktopQuery.addEventListener("change", syncDisclosureDefault);
+
+    initFromQuery();
+    syncDisclosureDefault();
     panel.hidden = false;
     countEl.hidden = false;
     render();
@@ -263,8 +364,7 @@ const shelves = [...new Set(gameList.map((game) => game.shelfName))].sort((a, b)
 <style>
   .game-filters {
     display: flex;
-    flex-wrap: wrap;
-    align-items: flex-end;
+    flex-direction: column;
     gap: 0.75rem;
     margin-top: 1.25rem;
   }
@@ -273,7 +373,10 @@ const shelves = [...new Set(gameList.map((game) => game.shelfName))].sort((a, b)
     display: flex;
     flex-direction: column;
     gap: 0.375rem;
-    flex: 1 1 200px;
+  }
+
+  .game-filters > .filter-field {
+    width: 100%;
   }
 
   .filter-label {
@@ -340,7 +443,71 @@ const shelves = [...new Set(gameList.map((game) => game.shelfName))].sort((a, b)
     outline-offset: 2px;
   }
 
+  .filter-toolbar {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.75rem;
+  }
+
+  .filter-disclosure {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .filter-disclosure-summary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 44px;
+    width: fit-content;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-border);
+    background: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .filter-disclosure-summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .filter-disclosure-summary:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  .filter-disclosure-icon {
+    flex-shrink: 0;
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid var(--color-accent);
+    border-bottom: 2px solid var(--color-accent);
+    transform: rotate(45deg);
+    transition: transform 0.2s ease;
+  }
+
+  .filter-disclosure[open] .filter-disclosure-icon {
+    transform: rotate(-135deg);
+  }
+
+  .filter-disclosure-content {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 0.75rem;
+    margin-top: 0.75rem;
+  }
+
+  .filter-disclosure-content .filter-field {
+    flex: 1 1 200px;
+    width: auto;
+  }
+
   .filter-reset {
+    flex-shrink: 0;
     min-height: 44px;
     padding: 0 1rem;
     border-radius: var(--radius-sm);
