@@ -7,6 +7,9 @@ export const SITE_DESCRIPTION =
 
 export const ADDRESS = "Perum New Kraksaan Land, Blok G16, Kebonagung, Kraksaan";
 
+// Placeholder URL — to be confirmed by the owner (see PRD §10).
+export const GOOGLE_MAPS_URL = "https://maps.app.goo.gl/placeholder";
+
 // Placeholder URLs — to be confirmed by the owner (see PRD §10).
 export const SOCIAL_LINKS = {
   instagram: "https://instagram.com/gatherloop",
