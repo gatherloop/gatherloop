@@ -6,4 +6,6 @@ export interface Game {
   minPlayers: number;
   maxPlayers: number;
   minAge: number;
+  tags: string[];
+  shelfName: string;
 }
