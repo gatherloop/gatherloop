@@ -15,8 +15,9 @@ npm install
 npm run dev
 ```
 
-The dev server runs at `http://localhost:4321/gatherloop/` (the `/gatherloop`
-base path matches the GitHub Pages deployment).
+The dev server runs at `http://localhost:4321/`. This repo is a
+`<owner>.github.io` user/org Pages repo, so GitHub Pages serves it from the
+domain root (no `/gatherloop` base path).
 
 ## Other commands
 
