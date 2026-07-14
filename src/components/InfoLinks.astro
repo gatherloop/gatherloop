@@ -4,6 +4,7 @@ import { withBase } from "../utils/url";
 ---
 
 <section class="info-links" aria-label="Tautan Informasi">
+  <h2 class="section-title">INFORMASI LEBIH LANJUT</h2>
   <a class="link-card" href={withBase("/games")}>
     <span class="link-icon" aria-hidden="true">🎲</span>
     <span class="link-body">
@@ -31,6 +32,12 @@ import { withBase } from "../utils/url";
 </section>
 
 <style>
+  .section-title {
+    font-size: 1.375rem;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+
   .info-links {
     display: flex;
     flex-direction: column;

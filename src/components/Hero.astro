@@ -2,8 +2,8 @@
 import { SITE_NAME } from "../consts";
 import { withBase } from "../utils/url";
 
-const heroImageSrc = withBase("/images/hero-placeholder.svg");
-const logoSrc = withBase("/favicon.svg");
+const heroImageSrc = withBase("/images/hero.webp");
+const logoSrc = withBase("/images/logo.webp");
 ---
 
 <section class="hero">
@@ -18,13 +18,12 @@ const logoSrc = withBase("/favicon.svg");
   </div>
 
   <div class="brand">
-    <img class="logo" src={logoSrc} alt="" width="32" height="32" />
-    <span class="brand-name">{SITE_NAME}</span>
+    <img class="logo" src={logoSrc} alt="" />
   </div>
 
-  <h1 class="tagline">Tempat Nongkrong Seru Sambil Main Board Game</h1>
+  <h1 class="tagline">Main Board Game Bareng Keluarga, Teman, atau Pasangan</h1>
   <p class="tagline-sub">
-    Ratusan pilihan game, kopi enak, dan teman baru menunggumu di {SITE_NAME}.
+    Gatherloop adalah board game pertama di probolinggo. Tempat dimana kamu bisa main board game bareng keluarga, teman, atau pasangan sambil menikmati makanan dan minuman
   </p>
 </section>
 
@@ -65,8 +64,7 @@ const logoSrc = withBase("/favicon.svg");
   }
 
   .logo {
-    width: 32px;
-    height: 32px;
+    width: 250px;
   }
 
   .brand-name {

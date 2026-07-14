@@ -5,14 +5,12 @@ export const SITE_TITLE = "Gatherloop — Board Game Cafe di Kraksaan";
 export const SITE_DESCRIPTION =
   "Gatherloop adalah board game cafe di Kraksaan, Probolinggo — main board game, ngopi, dan nongkrong bareng teman di satu tempat.";
 
-export const ADDRESS = "Perum New Kraksaan Land, Blok G16, Kebonagung, Kraksaan";
+export const ADDRESS =
+  "Perum New Kraksaan Land, Blok G16, Kebonagung, Kraksaan";
 
-// Placeholder URL — to be confirmed by the owner (see PRD §10).
-export const GOOGLE_MAPS_URL = "https://maps.app.goo.gl/placeholder";
+export const GOOGLE_MAPS_URL = "https://maps.app.goo.gl/KrRiqxBwS2ZwkpxXA";
 
-// Placeholder URLs — to be confirmed by the owner (see PRD §10).
 export const SOCIAL_LINKS = {
   instagram: "https://instagram.com/gatherloop",
-  whatsapp: "https://wa.me/6281234567890",
   tiktok: "https://www.tiktok.com/@gatherloop",
 };

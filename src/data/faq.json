@@ -1,22 +1,34 @@
 [
   {
-    "question": "Apakah harus reservasi dulu sebelum datang?",
-    "answer": "Tidak perlu, kamu bisa langsung datang. Untuk rombongan besar, hubungi kami dulu via Instagram/WhatsApp."
+    "question": "Gatherloop itu tempat apa ya ?",
+    "answer": "Gatherloop adalah board game cafe, tempat main board game bareng keluarga, pasangan, atau teman sambil menikmati makanan dan minuman."
   },
   {
-    "question": "Berapa harga untuk main board game?",
-    "answer": "Lihat bagian \"Harga Main\" di atas ya. Harga sudah termasuk akses ke semua koleksi game."
+    "question": "Kalau gak tau cara mainnya bagaimana ?",
+    "answer": "Tenang saja, game master kami siap merekomendasikan game yang cocok dan mengajarkan cara bermainnya."
   },
   {
-    "question": "Apakah ada yang mengajari cara bermain?",
-    "answer": "Ada! Tim kami siap menjelaskan aturan game yang kamu pilih."
+    "question": "Perlu pesan makan atau minum kah untuk main ?",
+    "answer": "Tidak kok. Mau main saja boleh, mau nongkrong sambil makan dan minum saja juga boleh."
   },
   {
-    "question": "Jam operasionalnya kapan?",
-    "answer": "Setiap hari, silakan cek Instagram kami untuk jam operasional terbaru."
+    "question": "Boleh bawa makanan atau minuman dari luar kah ?",
+    "answer": "Demi kenyamanan bersama, mohon tidak membawa makanan atau minuman dari luar."
   },
   {
-    "question": "Apakah boleh datang sendirian?",
-    "answer": "Boleh banget! Kamu bisa gabung bermain dengan pengunjung lain."
+    "question": "Selama bermain, boleh ganti game gak ? atau hanya satu game ?",
+    "answer": "Boleh. pelanggan bebas memainkan semua game sepuasnya sesuai durasi bermainnya."
+  },
+  {
+    "question": "Boleh membawa game sendiri kah ?",
+    "answer": "Boleh. Namun tarif bermain kami tetap berlaku selama bermain di Gatherloop."
+  },
+  {
+    "question": "Bolehkah game master bermain dengan kami ?",
+    "answer": "Mohon maaf, game master hanya bertugas memandu dan tidak ikut bermain dengan pelanggan."
+  },
+  {
+    "question": "Ada tempat buat merokok gak ?",
+    "answer": "Ada. kami menyediakan area outdoor khusus bagi pelanggan yang ingin merokok."
   }
 ]
