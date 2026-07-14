@@ -1,0 +1,68 @@
+---
+import type { Game } from "../types";
+import { formatAge, formatDuration, formatPlayers } from "../utils/format";
+import { withBase } from "../utils/url";
+
+interface Props {
+  game: Game;
+}
+
+const { game } = Astro.props;
+
+const duration = formatDuration(game.minDurationMinutes, game.maxDurationMinutes);
+const players = formatPlayers(game.minPlayers, game.maxPlayers);
+const age = formatAge(game.minAge);
+---
+
+<article class="game-card">
+  <img
+    class="game-image"
+    src={withBase(game.image)}
+    alt={`Box art ${game.title}`}
+    width="400"
+    height="400"
+    loading="lazy"
+  />
+  <div class="game-info">
+    <h2 class="game-title">{game.title}</h2>
+    <p class="game-meta"><span aria-hidden="true">⏱</span> {duration}</p>
+    <p class="game-meta"><span aria-hidden="true">👥</span> {players}</p>
+    <p class="game-meta"><span aria-hidden="true">🎂</span> {age}</p>
+  </div>
+</article>
+
+<style>
+  .game-card {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: var(--radius-lg);
+    background: #fff;
+    box-shadow: var(--shadow-card);
+  }
+
+  .game-image {
+    width: 96px;
+    height: 96px;
+    flex-shrink: 0;
+    border-radius: var(--radius-sm);
+    object-fit: cover;
+  }
+
+  .game-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.25rem;
+    min-width: 0;
+  }
+
+  .game-title {
+    font-size: 1.0625rem;
+  }
+
+  .game-meta {
+    font-size: 0.875rem;
+    opacity: 0.85;
+  }
+</style>

@@ -1,0 +1,74 @@
+[
+  {
+    "title": "Splendor",
+    "image": "/images/games/placeholder.svg",
+    "minDurationMinutes": 30,
+    "maxDurationMinutes": 60,
+    "minPlayers": 2,
+    "maxPlayers": 4,
+    "minAge": 10
+  },
+  {
+    "title": "Uno",
+    "image": "/images/games/placeholder.svg",
+    "minDurationMinutes": 15,
+    "maxDurationMinutes": 30,
+    "minPlayers": 2,
+    "maxPlayers": 10,
+    "minAge": 7
+  },
+  {
+    "title": "Monopoli",
+    "image": "/images/games/placeholder.svg",
+    "minDurationMinutes": 60,
+    "maxDurationMinutes": 180,
+    "minPlayers": 2,
+    "maxPlayers": 6,
+    "minAge": 8
+  },
+  {
+    "title": "Catan",
+    "image": "/images/games/placeholder.svg",
+    "minDurationMinutes": 60,
+    "maxDurationMinutes": 120,
+    "minPlayers": 3,
+    "maxPlayers": 4,
+    "minAge": 10
+  },
+  {
+    "title": "Dixit",
+    "image": "/images/games/placeholder.svg",
+    "minDurationMinutes": 30,
+    "maxDurationMinutes": 45,
+    "minPlayers": 3,
+    "maxPlayers": 6,
+    "minAge": 8
+  },
+  {
+    "title": "Werewolf",
+    "image": "/images/games/placeholder.svg",
+    "minDurationMinutes": 30,
+    "maxDurationMinutes": 45,
+    "minPlayers": 8,
+    "maxPlayers": 18,
+    "minAge": 10
+  },
+  {
+    "title": "Codenames",
+    "image": "/images/games/placeholder.svg",
+    "minDurationMinutes": 15,
+    "maxDurationMinutes": 30,
+    "minPlayers": 4,
+    "maxPlayers": 8,
+    "minAge": 14
+  },
+  {
+    "title": "Jenga",
+    "image": "/images/games/placeholder.svg",
+    "minDurationMinutes": 15,
+    "maxDurationMinutes": 30,
+    "minPlayers": 2,
+    "maxPlayers": 8,
+    "minAge": 6
+  }
+]

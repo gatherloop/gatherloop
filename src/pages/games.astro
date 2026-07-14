@@ -1,0 +1,44 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Footer from "../components/Footer.astro";
+import BackLink from "../components/BackLink.astro";
+import GameCard from "../components/GameCard.astro";
+import games from "../data/games.json";
+import type { Game } from "../types";
+
+const gameList = games as Game[];
+---
+
+<Layout
+  title="Koleksi Game — Gatherloop"
+  description="Koleksi board game yang bisa kamu mainkan di Gatherloop — lengkap dengan durasi, jumlah pemain, dan usia yang disarankan."
+>
+  <main>
+    <BackLink />
+    <h1 class="page-title">Koleksi Game</h1>
+    <div class="game-grid">
+      {gameList.map((game) => <GameCard game={game} />)}
+    </div>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .page-title {
+    margin-top: 1rem;
+    font-size: 1.5rem;
+  }
+
+  .game-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+  }
+
+  @media (min-width: 480px) {
+    .game-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>
