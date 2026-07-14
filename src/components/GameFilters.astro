@@ -1,4 +1,15 @@
 ---
+import games from "../data/games.json";
+import type { Game } from "../types";
+
+const gameList = games satisfies Game[];
+
+const tags = [...new Set(gameList.flatMap((game) => game.tags))].sort((a, b) =>
+  a.localeCompare(b, "id"),
+);
+const shelves = [...new Set(gameList.map((game) => game.shelfName))].sort((a, b) =>
+  a.localeCompare(b, "id"),
+);
 ---
 
 <section class="game-filters" id="game-filters" aria-label="Filter game" hidden>
@@ -13,6 +24,25 @@
       autocomplete="off"
     />
   </div>
+  <div class="filter-field">
+    <span class="filter-label" id="filter-tags-label">Tag</span>
+    <div class="filter-chips" role="group" aria-labelledby="filter-tags-label" id="filter-tags">
+      {
+        tags.map((tag) => (
+          <button type="button" class="filter-chip" data-tag={tag} aria-pressed="false">
+            {tag}
+          </button>
+        ))
+      }
+    </div>
+  </div>
+  <div class="filter-field">
+    <label for="filter-shelf" class="filter-label">Lokasi rak</label>
+    <select id="filter-shelf" name="shelf" class="filter-select">
+      <option value="">Semua rak</option>
+      {shelves.map((shelf) => <option value={shelf}>{shelf}</option>)}
+    </select>
+  </div>
   <button type="button" id="filter-reset" class="filter-reset" hidden>
     Reset filter
   </button>
@@ -22,22 +52,33 @@
 <script>
   const panel = document.getElementById("game-filters");
   const titleInput = document.getElementById("filter-title") as HTMLInputElement | null;
+  const tagButtons = Array.from(
+    document.querySelectorAll<HTMLButtonElement>("#filter-tags .filter-chip"),
+  );
+  const shelfSelect = document.getElementById("filter-shelf") as HTMLSelectElement | null;
   const resetButton = document.getElementById("filter-reset");
   const countEl = document.getElementById("filter-count");
   const emptyEl = document.getElementById("filter-empty");
   const grid = document.getElementById("game-grid");
 
-  if (panel && titleInput && resetButton && countEl && emptyEl && grid) {
+  if (panel && titleInput && shelfSelect && resetButton && countEl && emptyEl && grid) {
     const cards = Array.from(grid.querySelectorAll<HTMLElement>(".game-card"));
     const total = cards.length;
 
     let title = "";
+    const selectedTags = new Set<string>();
+    let shelf = "";
     let debounceTimer: ReturnType<typeof setTimeout> | undefined;
 
     function render() {
       let visible = 0;
       for (const card of cards) {
-        const matches = !title || (card.dataset.title ?? "").includes(title);
+        const cardTags = (card.dataset.tags ?? "").split(",");
+        const matchesTitle = !title || (card.dataset.title ?? "").includes(title);
+        const matchesTags =
+          selectedTags.size === 0 || cardTags.some((tag) => selectedTags.has(tag));
+        const matchesShelf = !shelf || card.dataset.shelf === shelf;
+        const matches = matchesTitle && matchesTags && matchesShelf;
         card.hidden = !matches;
         if (matches) visible++;
       }
@@ -45,7 +86,7 @@
       countEl!.textContent =
         visible === total ? `${total} game` : `Menampilkan ${visible} dari ${total} game`;
       emptyEl!.hidden = visible !== 0;
-      resetButton!.hidden = title === "";
+      resetButton!.hidden = title === "" && selectedTags.size === 0 && shelf === "";
     }
 
     titleInput.addEventListener("input", () => {
@@ -56,10 +97,35 @@
       }, 150);
     });
 
+    for (const button of tagButtons) {
+      button.addEventListener("click", () => {
+        const tag = button.dataset.tag ?? "";
+        const pressed = button.getAttribute("aria-pressed") === "true";
+        button.setAttribute("aria-pressed", String(!pressed));
+        if (pressed) {
+          selectedTags.delete(tag);
+        } else {
+          selectedTags.add(tag);
+        }
+        render();
+      });
+    }
+
+    shelfSelect.addEventListener("change", () => {
+      shelf = shelfSelect.value;
+      render();
+    });
+
     resetButton.addEventListener("click", () => {
       clearTimeout(debounceTimer);
       titleInput.value = "";
       title = "";
+      selectedTags.clear();
+      for (const button of tagButtons) {
+        button.setAttribute("aria-pressed", "false");
+      }
+      shelfSelect.value = "";
+      shelf = "";
       render();
       titleInput.focus();
     });
@@ -104,6 +170,50 @@
   .filter-input:focus-visible {
     outline: 2px solid var(--color-accent);
     outline-offset: 1px;
+  }
+
+  .filter-select {
+    min-height: 44px;
+    padding: 0.625rem 0.875rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-border);
+    background: #fff;
+    font: inherit;
+    color: inherit;
+  }
+
+  .filter-select:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 1px;
+  }
+
+  .filter-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .filter-chip {
+    min-height: 44px;
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    border: 1px solid var(--color-border);
+    background: #fff;
+    color: inherit;
+    font: inherit;
+    font-size: 0.875rem;
+    cursor: pointer;
+  }
+
+  .filter-chip[aria-pressed="true"] {
+    border-color: var(--color-accent);
+    background: var(--color-accent);
+    color: var(--color-accent-contrast);
+  }
+
+  .filter-chip:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
   }
 
   .filter-reset {
