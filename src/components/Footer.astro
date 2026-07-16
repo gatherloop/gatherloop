@@ -1,5 +1,13 @@
 ---
 import { ADDRESS, SITE_NAME, SOCIAL_LINKS } from "../consts";
+import { DEFAULT_LOCALE, t, type Locale } from "../i18n";
+
+interface Props {
+  locale?: Locale;
+}
+
+const { locale = DEFAULT_LOCALE } = Astro.props;
+const dict = t(locale).footer;
 ---
 
 <footer class="site-footer">
@@ -9,7 +17,7 @@ import { ADDRESS, SITE_NAME, SOCIAL_LINKS } from "../consts";
       target="_blank"
       rel="noopener noreferrer"
       class="social-link"
-      aria-label="Instagram Gatherloop"
+      aria-label={dict.instagramAriaLabel}
     >
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
         <rect x="3" y="3" width="18" height="18" rx="5" />
@@ -22,7 +30,7 @@ import { ADDRESS, SITE_NAME, SOCIAL_LINKS } from "../consts";
       target="_blank"
       rel="noopener noreferrer"
       class="social-link"
-      aria-label="TikTok Gatherloop"
+      aria-label={dict.tiktokAriaLabel}
     >
       <svg viewBox="0 0 24 24" fill="currentColor">
         <path

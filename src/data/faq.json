@@ -1,34 +1,70 @@
-[
-  {
-    "question": "Gatherloop itu tempat apa ya ?",
-    "answer": "Gatherloop adalah board game cafe, tempat main board game bareng keluarga, pasangan, atau teman sambil menikmati makanan dan minuman."
-  },
-  {
-    "question": "Kalau gak tau cara mainnya bagaimana ?",
-    "answer": "Tenang saja, game master kami siap merekomendasikan game yang cocok dan mengajarkan cara bermainnya."
-  },
-  {
-    "question": "Perlu pesan makan atau minum kah untuk main ?",
-    "answer": "Tidak kok. Mau main saja boleh, mau nongkrong sambil makan dan minum saja juga boleh."
-  },
-  {
-    "question": "Boleh bawa makanan atau minuman dari luar kah ?",
-    "answer": "Demi kenyamanan bersama, mohon tidak membawa makanan atau minuman dari luar."
-  },
-  {
-    "question": "Selama bermain, boleh ganti game gak ? atau hanya satu game ?",
-    "answer": "Boleh. pelanggan bebas memainkan semua game sepuasnya sesuai durasi bermainnya."
-  },
-  {
-    "question": "Boleh membawa game sendiri kah ?",
-    "answer": "Boleh. Namun tarif bermain kami tetap berlaku selama bermain di Gatherloop."
-  },
-  {
-    "question": "Bolehkah game master bermain dengan kami ?",
-    "answer": "Mohon maaf, game master hanya bertugas memandu dan tidak ikut bermain dengan pelanggan."
-  },
-  {
-    "question": "Ada tempat buat merokok gak ?",
-    "answer": "Ada. kami menyediakan area outdoor khusus bagi pelanggan yang ingin merokok."
-  }
-]
+{
+  "id": [
+    {
+      "question": "Gatherloop itu tempat apa ya ?",
+      "answer": "Gatherloop adalah board game cafe, tempat main board game bareng keluarga, pasangan, atau teman sambil menikmati makanan dan minuman."
+    },
+    {
+      "question": "Kalau gak tau cara mainnya bagaimana ?",
+      "answer": "Tenang saja, game master kami siap merekomendasikan game yang cocok dan mengajarkan cara bermainnya."
+    },
+    {
+      "question": "Perlu pesan makan atau minum kah untuk main ?",
+      "answer": "Tidak kok. Mau main saja boleh, mau nongkrong sambil makan dan minum saja juga boleh."
+    },
+    {
+      "question": "Boleh bawa makanan atau minuman dari luar kah ?",
+      "answer": "Demi kenyamanan bersama, mohon tidak membawa makanan atau minuman dari luar."
+    },
+    {
+      "question": "Selama bermain, boleh ganti game gak ? atau hanya satu game ?",
+      "answer": "Boleh. pelanggan bebas memainkan semua game sepuasnya sesuai durasi bermainnya."
+    },
+    {
+      "question": "Boleh membawa game sendiri kah ?",
+      "answer": "Boleh. Namun tarif bermain kami tetap berlaku selama bermain di Gatherloop."
+    },
+    {
+      "question": "Bolehkah game master bermain dengan kami ?",
+      "answer": "Mohon maaf, game master hanya bertugas memandu dan tidak ikut bermain dengan pelanggan."
+    },
+    {
+      "question": "Ada tempat buat merokok gak ?",
+      "answer": "Ada. kami menyediakan area outdoor khusus bagi pelanggan yang ingin merokok."
+    }
+  ],
+  "en": [
+    {
+      "question": "What kind of place is Gatherloop?",
+      "answer": "Gatherloop is a board game cafe, a place to play board games with family, your partner, or friends while enjoying food and drinks."
+    },
+    {
+      "question": "What if I don't know how to play?",
+      "answer": "No worries — our game masters are happy to recommend a game that suits you and teach you how to play."
+    },
+    {
+      "question": "Do I need to order food or drinks to play?",
+      "answer": "Not at all. You can come just to play, or just to hang out with food and drinks — either way works."
+    },
+    {
+      "question": "Can I bring my own food or drinks?",
+      "answer": "For everyone's comfort, please don't bring outside food or drinks."
+    },
+    {
+      "question": "Can I switch games while playing, or is it just one game?",
+      "answer": "You can switch games freely — play as many games as you like within your play time."
+    },
+    {
+      "question": "Can I bring my own game?",
+      "answer": "Sure. Our play rate still applies while you're playing at Gatherloop."
+    },
+    {
+      "question": "Can the game master join in and play with us?",
+      "answer": "Sorry, game masters are only there to guide — they don't join in as players."
+    },
+    {
+      "question": "Is there a smoking area?",
+      "answer": "Yes, we have a dedicated outdoor area for guests who want to smoke."
+    }
+  ]
+}

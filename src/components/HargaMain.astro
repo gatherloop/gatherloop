@@ -1,19 +1,28 @@
 ---
 import { withBase } from "../utils/url";
+import { DEFAULT_LOCALE, t, type Locale } from "../i18n";
+
+interface Props {
+  locale?: Locale;
+}
+
+const { locale = DEFAULT_LOCALE } = Astro.props;
+const dict = t(locale).hargaMain;
 
 const hargaMainImageSrc = withBase("/images/harga main.webp");
 ---
 
 <section class="harga-main">
-  <h2 class="section-title">HARGA MAIN</h2>
+  <h2 class="section-title">{dict.sectionTitle}</h2>
   <img
     class="harga-main-image"
     src={hargaMainImageSrc}
-    alt="Daftar harga main Gatherloop"
+    alt={dict.imageAlt}
     width="480"
     height="600"
     loading="lazy"
   />
+  {dict.caption && <p class="harga-main-caption">{dict.caption}</p>}
 </section>
 
 <style>
@@ -34,5 +43,11 @@ const hargaMainImageSrc = withBase("/images/harga main.webp");
     margin-inline: auto;
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-card);
+  }
+
+  .harga-main-caption {
+    margin-top: 0.75rem;
+    font-size: 0.875rem;
+    opacity: 0.8;
   }
 </style>

@@ -9,3 +9,8 @@ export interface Game {
   tags: string[];
   shelfName: string;
 }
+
+export interface FaqItem {
+  question: string;
+  answer: string;
+}

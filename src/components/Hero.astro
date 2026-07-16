@@ -1,6 +1,13 @@
 ---
-import { SITE_NAME } from "../consts";
 import { withBase } from "../utils/url";
+import { DEFAULT_LOCALE, t, type Locale } from "../i18n";
+
+interface Props {
+  locale?: Locale;
+}
+
+const { locale = DEFAULT_LOCALE } = Astro.props;
+const dict = t(locale).hero;
 
 const heroImageSrc = withBase("/images/hero.webp");
 const logoSrc = withBase("/images/logo.webp");
@@ -11,7 +18,7 @@ const logoSrc = withBase("/images/logo.webp");
     <img
       class="hero-image"
       src={heroImageSrc}
-      alt="Suasana Gatherloop — pengunjung sedang main board game"
+      alt={dict.imageAlt}
       width="960"
       height="720"
     />
@@ -21,10 +28,8 @@ const logoSrc = withBase("/images/logo.webp");
     <img class="logo" src={logoSrc} alt="" />
   </div>
 
-  <h1 class="tagline">Main Board Game Bareng Keluarga, Teman, atau Pasangan</h1>
-  <p class="tagline-sub">
-    Gatherloop adalah board game pertama di probolinggo. Tempat dimana kamu bisa main board game bareng keluarga, teman, atau pasangan sambil menikmati makanan dan minuman
-  </p>
+  <h1 class="tagline">{dict.tagline}</h1>
+  <p class="tagline-sub">{dict.taglineSub}</p>
 </section>
 
 <style>

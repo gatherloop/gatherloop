@@ -1,9 +1,19 @@
 ---
-import faqItems from "../data/faq.json";
+import faqData from "../data/faq.json";
+import { DEFAULT_LOCALE, t, type Locale } from "../i18n";
+import type { FaqItem } from "../types";
+
+interface Props {
+  locale?: Locale;
+}
+
+const { locale = DEFAULT_LOCALE } = Astro.props;
+const dict = t(locale).faq;
+const faqItems: FaqItem[] = faqData[locale];
 ---
 
-<section class="faq" aria-label="Pertanyaan yang Sering Ditanyakan">
-  <h2 class="section-title">PERTANYAAN YANG SERING DITANYAKAN</h2>
+<section class="faq" aria-label={dict.ariaLabel}>
+  <h2 class="section-title">{dict.sectionTitle}</h2>
   <div class="faq-list">
     {
       faqItems.map((item) => (

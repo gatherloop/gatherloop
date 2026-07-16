@@ -1,0 +1,20 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Hero from "../../components/Hero.astro";
+import HargaMain from "../../components/HargaMain.astro";
+import InfoLinks from "../../components/InfoLinks.astro";
+import Faq from "../../components/Faq.astro";
+import Footer from "../../components/Footer.astro";
+
+const locale = "en";
+---
+
+<Layout locale={locale}>
+  <main>
+    <Hero locale={locale} />
+    <HargaMain locale={locale} />
+    <InfoLinks locale={locale} />
+    <Faq locale={locale} />
+  </main>
+  <Footer locale={locale} />
+</Layout>
