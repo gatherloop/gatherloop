@@ -5,4 +5,11 @@ import sitemap from "@astrojs/sitemap";
 export default defineConfig({
   site: "https://gatherloop.github.io",
   integrations: [sitemap()],
+  i18n: {
+    defaultLocale: "id",
+    locales: ["id", "en"],
+    routing: {
+      prefixDefaultLocale: false,
+    },
+  },
 });

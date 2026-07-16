@@ -2,19 +2,27 @@
 import "../styles/global.css";
 import { SITE_NAME, SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 import { withBase } from "../utils/url";
+import { DEFAULT_LOCALE, type Locale } from "../i18n";
 
 interface Props {
+  locale?: Locale;
   title?: string;
   description?: string;
 }
 
-const { title = SITE_TITLE, description = SITE_DESCRIPTION } = Astro.props;
+const { locale = DEFAULT_LOCALE, title = SITE_TITLE[locale], description = SITE_DESCRIPTION[locale] } =
+  Astro.props;
 const faviconHref = withBase("/favicon.png");
 const ogImageUrl = new URL(withBase("/images/og-image.png"), Astro.site);
+
+const OG_LOCALE: Record<Locale, string> = {
+  id: "id_ID",
+  en: "en_US",
+};
 ---
 
 <!doctype html>
-<html lang="id">
+<html lang={locale}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -24,7 +32,7 @@ const ogImageUrl = new URL(withBase("/images/og-image.png"), Astro.site);
     <link rel="canonical" href={Astro.url} />
 
     <meta property="og:type" content="website" />
-    <meta property="og:locale" content="id_ID" />
+    <meta property="og:locale" content={OG_LOCALE[locale]} />
     <meta property="og:url" content={Astro.url} />
     <meta property="og:site_name" content={SITE_NAME} />
     <meta property="og:title" content={title} />

@@ -1,9 +1,16 @@
+import type { Locale } from "./i18n";
+
 export const SITE_NAME = "Gatherloop";
 
-export const SITE_TITLE = "Gatherloop — Board Game Cafe di Kraksaan";
+export const SITE_TITLE: Record<Locale, string> = {
+  id: "Gatherloop — Board Game Cafe di Kraksaan",
+  en: "Gatherloop — Board Game Cafe in Kraksaan",
+};
 
-export const SITE_DESCRIPTION =
-  "Gatherloop adalah board game cafe di Kraksaan, Probolinggo — main board game, ngopi, dan nongkrong bareng teman di satu tempat.";
+export const SITE_DESCRIPTION: Record<Locale, string> = {
+  id: "Gatherloop adalah board game cafe di Kraksaan, Probolinggo — main board game, ngopi, dan nongkrong bareng teman di satu tempat.",
+  en: "Gatherloop is a board game cafe in Kraksaan, Probolinggo — play board games, grab coffee, and hang out with friends, all in one place.",
+};
 
 export const ADDRESS =
   "Perum New Kraksaan Land, Blok G16, Kebonagung, Kraksaan";

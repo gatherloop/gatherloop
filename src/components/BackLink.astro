@@ -1,9 +1,17 @@
 ---
-import { withBase } from "../utils/url";
+import { localizePath } from "../utils/url";
+import { DEFAULT_LOCALE, t, type Locale } from "../i18n";
+
+interface Props {
+  locale?: Locale;
+}
+
+const { locale = DEFAULT_LOCALE } = Astro.props;
+const label = t(locale).backLink.label;
 ---
 
-<a class="back-link" href={withBase("/")}>
-  <span aria-hidden="true">‹</span> Kembali
+<a class="back-link" href={localizePath(locale, "/")}>
+  <span aria-hidden="true">‹</span> {label}
 </a>
 
 <style>
