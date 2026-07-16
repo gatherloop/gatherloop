@@ -11,6 +11,11 @@ export interface Dictionary {
   backLink: {
     label: string;
   };
+  languageSwitch: {
+    ariaLabel: string;
+    id: string;
+    en: string;
+  };
   units: {
     minute: string;
     player: string;

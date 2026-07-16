@@ -2,11 +2,13 @@
 import Layout from "../../layouts/Layout.astro";
 import Footer from "../../components/Footer.astro";
 import BackLink from "../../components/BackLink.astro";
+import LanguageSwitch from "../../components/LanguageSwitch.astro";
 import { withBase } from "../../utils/url";
 import { t } from "../../i18n";
 
 const locale = "en";
 const dict = t(locale).menuPage;
+const path = "/menu";
 
 // Add or remove entries to change how many menu pages are shown — no other code
 // change needed. Each `src` file lives in public/images/menu/.
@@ -20,7 +22,10 @@ const menuImages = [
 
 <Layout locale={locale} title={dict.title} description={dict.description}>
   <main>
-    <BackLink locale={locale} />
+    <div class="page-header-row">
+      <BackLink locale={locale} />
+      <LanguageSwitch locale={locale} path={path} />
+    </div>
     <h1 class="page-title">{dict.heading}</h1>
     <div class="menu-images">
       {
@@ -37,10 +42,18 @@ const menuImages = [
       }
     </div>
   </main>
-  <Footer locale={locale} />
+  <Footer locale={locale} path={path} />
 </Layout>
 
 <style>
+  .page-header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+  }
+
   .page-title {
     margin-top: 1rem;
     font-size: 1.5rem;

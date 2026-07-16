@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import Footer from "../components/Footer.astro";
 import BackLink from "../components/BackLink.astro";
+import LanguageSwitch from "../components/LanguageSwitch.astro";
 import GameCard from "../components/GameCard.astro";
 import GameFilters from "../components/GameFilters.astro";
 import games from "../data/games.json";
@@ -10,13 +11,17 @@ import { DEFAULT_LOCALE, t } from "../i18n";
 
 const locale = DEFAULT_LOCALE;
 const dict = t(locale).gamesPage;
+const path = "/games";
 
 const gameList: Game[] = games;
 ---
 
 <Layout locale={locale} title={dict.title} description={dict.description}>
   <main>
-    <BackLink locale={locale} />
+    <div class="page-header-row">
+      <BackLink locale={locale} />
+      <LanguageSwitch locale={locale} path={path} />
+    </div>
     <h1 class="page-title">{dict.heading}</h1>
     <GameFilters locale={locale} />
     <div class="game-grid" id="game-grid">
@@ -26,10 +31,18 @@ const gameList: Game[] = games;
       {dict.emptyState}
     </p>
   </main>
-  <Footer locale={locale} />
+  <Footer locale={locale} path={path} />
 </Layout>
 
 <style>
+  .page-header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+  }
+
   .page-title {
     margin-top: 1rem;
     font-size: 1.5rem;
