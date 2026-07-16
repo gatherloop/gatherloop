@@ -2,17 +2,20 @@
 import type { Game } from "../types";
 import { formatAge, formatDuration, formatPlayers } from "../utils/format";
 import { withBase } from "../utils/url";
-import { DEFAULT_LOCALE } from "../i18n";
+import { DEFAULT_LOCALE, t, type Locale } from "../i18n";
 
 interface Props {
   game: Game;
+  locale?: Locale;
 }
 
-const { game } = Astro.props;
+const { game, locale = DEFAULT_LOCALE } = Astro.props;
+const dict = t(locale);
 
-const duration = formatDuration(DEFAULT_LOCALE, game.minDurationMinutes, game.maxDurationMinutes);
-const players = formatPlayers(DEFAULT_LOCALE, game.minPlayers, game.maxPlayers);
+const duration = formatDuration(locale, game.minDurationMinutes, game.maxDurationMinutes);
+const players = formatPlayers(locale, game.minPlayers, game.maxPlayers);
 const age = formatAge(game.minAge);
+const tagLabels: Record<string, string> = dict.tags;
 ---
 
 <article
@@ -29,7 +32,7 @@ const age = formatAge(game.minAge);
   <img
     class="game-image"
     src={withBase(game.image)}
-    alt={`Box art ${game.title}`}
+    alt={`${dict.gameCard.imageAltPrefix} ${game.title}`}
     width="400"
     height="400"
     loading="lazy"
@@ -43,7 +46,7 @@ const age = formatAge(game.minAge);
       <span class="game-shelf"><span aria-hidden="true">📍</span> {game.shelfName}</span>
     </p>
     <ul class="game-tags">
-      {game.tags.map((tag) => <li class="game-tag">{tag}</li>)}
+      {game.tags.map((tag) => <li class="game-tag">{tagLabels[tag] ?? tag}</li>)}
     </ul>
   </div>
 </article>
