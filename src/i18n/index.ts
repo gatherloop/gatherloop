@@ -15,6 +15,31 @@ export interface Dictionary {
     minute: string;
     player: string;
   };
+  hero: {
+    imageAlt: string;
+    tagline: string;
+    taglineSub: string;
+  };
+  hargaMain: {
+    sectionTitle: string;
+    imageAlt: string;
+    caption: string;
+  };
+  infoLinks: {
+    ariaLabel: string;
+    sectionTitle: string;
+    games: string;
+    menu: string;
+    location: string;
+  };
+  faq: {
+    ariaLabel: string;
+    sectionTitle: string;
+  };
+  footer: {
+    instagramAriaLabel: string;
+    tiktokAriaLabel: string;
+  };
 }
 
 const dictionaries: Record<Locale, Dictionary> = { id, en };

@@ -1,22 +1,30 @@
 ---
 import { ADDRESS, GOOGLE_MAPS_URL } from "../consts";
-import { withBase } from "../utils/url";
+import { localizePath } from "../utils/url";
+import { DEFAULT_LOCALE, t, type Locale } from "../i18n";
+
+interface Props {
+  locale?: Locale;
+}
+
+const { locale = DEFAULT_LOCALE } = Astro.props;
+const dict = t(locale).infoLinks;
 ---
 
-<section class="info-links" aria-label="Tautan Informasi">
-  <h2 class="section-title">INFORMASI LEBIH LANJUT</h2>
-  <a class="link-card" href={withBase("/games")}>
+<section class="info-links" aria-label={dict.ariaLabel}>
+  <h2 class="section-title">{dict.sectionTitle}</h2>
+  <a class="link-card" href={localizePath(locale, "/games")}>
     <span class="link-icon" aria-hidden="true">🎲</span>
     <span class="link-body">
-      <span class="link-title">Koleksi Game</span>
+      <span class="link-title">{dict.games}</span>
     </span>
     <span class="link-chevron" aria-hidden="true">›</span>
   </a>
 
-  <a class="link-card" href={withBase("/menu")}>
+  <a class="link-card" href={localizePath(locale, "/menu")}>
     <span class="link-icon" aria-hidden="true">☕</span>
     <span class="link-body">
-      <span class="link-title">Menu Makanan &amp; Minuman</span>
+      <span class="link-title">{dict.menu}</span>
     </span>
     <span class="link-chevron" aria-hidden="true">›</span>
   </a>
@@ -24,7 +32,7 @@ import { withBase } from "../utils/url";
   <a class="link-card" href={GOOGLE_MAPS_URL} target="_blank" rel="noopener">
     <span class="link-icon" aria-hidden="true">📍</span>
     <span class="link-body">
-      <span class="link-title">Lokasi</span>
+      <span class="link-title">{dict.location}</span>
       <span class="link-subtitle">{ADDRESS}</span>
     </span>
     <span class="link-chevron" aria-hidden="true">↗</span>
