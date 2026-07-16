@@ -7,7 +7,7 @@ import GameFilters from "../components/GameFilters.astro";
 import games from "../data/games.json";
 import type { Game } from "../types";
 
-const gameList = games satisfies Game[];
+const gameList: Game[] = games;
 ---
 
 <Layout

@@ -2,6 +2,7 @@
 import type { Game } from "../types";
 import { formatAge, formatDuration, formatPlayers } from "../utils/format";
 import { withBase } from "../utils/url";
+import { DEFAULT_LOCALE } from "../i18n";
 
 interface Props {
   game: Game;
@@ -9,8 +10,8 @@ interface Props {
 
 const { game } = Astro.props;
 
-const duration = formatDuration(game.minDurationMinutes, game.maxDurationMinutes);
-const players = formatPlayers(game.minPlayers, game.maxPlayers);
+const duration = formatDuration(DEFAULT_LOCALE, game.minDurationMinutes, game.maxDurationMinutes);
+const players = formatPlayers(DEFAULT_LOCALE, game.minPlayers, game.maxPlayers);
 const age = formatAge(game.minAge);
 ---
 

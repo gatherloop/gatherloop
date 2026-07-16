@@ -2,7 +2,7 @@
 import games from "../data/games.json";
 import type { Game } from "../types";
 
-const gameList = games satisfies Game[];
+const gameList: Game[] = games;
 
 const tags = [...new Set(gameList.flatMap((game) => game.tags))].sort((a, b) =>
   a.localeCompare(b, "id"),
