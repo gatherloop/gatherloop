@@ -49,6 +49,12 @@ export interface Dictionary {
   gameCard: {
     imageAltPrefix: string;
   };
+  menuPage: {
+    title: string;
+    description: string;
+    heading: string;
+    imageAlt: string;
+  };
   gameFilters: {
     panelAriaLabel: string;
     titleLabel: string;
