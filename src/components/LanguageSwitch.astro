@@ -1,0 +1,77 @@
+---
+import { localizePath } from "../utils/url";
+import { DEFAULT_LOCALE, LOCALES, t, type Locale } from "../i18n";
+
+interface Props {
+  locale?: Locale;
+  path: string;
+}
+
+const { locale = DEFAULT_LOCALE, path } = Astro.props;
+const dict = t(locale).languageSwitch;
+---
+
+<nav class="language-switch" aria-label={dict.ariaLabel}>
+  {
+    LOCALES.map((loc) => (
+      <a
+        href={localizePath(loc, path)}
+        class="language-switch-link"
+        data-lang={loc}
+        aria-current={loc === locale ? "true" : undefined}
+      >
+        {dict[loc]}
+      </a>
+    ))
+  }
+</nav>
+
+<script>
+  const STORAGE_KEY = "gatherloop-lang";
+
+  const links = document.querySelectorAll<HTMLAnchorElement>(".language-switch-link");
+
+  if (location.search) {
+    for (const link of links) {
+      link.search = location.search;
+    }
+  }
+
+  for (const link of links) {
+    link.addEventListener("click", () => {
+      const lang = link.dataset.lang;
+      if (!lang) return;
+      try {
+        localStorage.setItem(STORAGE_KEY, lang);
+      } catch {}
+    });
+  }
+</script>
+
+<style>
+  .language-switch {
+    display: inline-flex;
+    gap: 0.5rem;
+  }
+
+  .language-switch-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0.5rem 0.75rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-border);
+    font-weight: 700;
+    font-size: 0.875rem;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .language-switch-link[aria-current="true"] {
+    border-color: var(--color-accent);
+    background: var(--color-accent);
+    color: var(--color-accent-contrast);
+  }
+</style>

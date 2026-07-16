@@ -1,16 +1,19 @@
 ---
 import { ADDRESS, SITE_NAME, SOCIAL_LINKS } from "../consts";
 import { DEFAULT_LOCALE, t, type Locale } from "../i18n";
+import LanguageSwitch from "./LanguageSwitch.astro";
 
 interface Props {
   locale?: Locale;
+  path: string;
 }
 
-const { locale = DEFAULT_LOCALE } = Astro.props;
+const { locale = DEFAULT_LOCALE, path } = Astro.props;
 const dict = t(locale).footer;
 ---
 
 <footer class="site-footer">
+  <LanguageSwitch locale={locale} path={path} />
   <div class="social-links">
     <a
       href={SOCIAL_LINKS.instagram}
@@ -49,6 +52,11 @@ const dict = t(locale).footer;
     padding-block: 1.5rem 2rem;
     border-top: 1px solid var(--color-border);
     text-align: center;
+  }
+
+  .site-footer :global(.language-switch) {
+    justify-content: center;
+    margin-bottom: 1.25rem;
   }
 
   .social-links {

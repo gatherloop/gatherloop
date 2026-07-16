@@ -5,16 +5,29 @@ import HargaMain from "../../components/HargaMain.astro";
 import InfoLinks from "../../components/InfoLinks.astro";
 import Faq from "../../components/Faq.astro";
 import Footer from "../../components/Footer.astro";
+import LanguageSwitch from "../../components/LanguageSwitch.astro";
 
 const locale = "en";
+const path = "/";
 ---
 
 <Layout locale={locale}>
   <main>
+    <div class="language-switch-row">
+      <LanguageSwitch locale={locale} path={path} />
+    </div>
     <Hero locale={locale} />
     <HargaMain locale={locale} />
     <InfoLinks locale={locale} />
     <Faq locale={locale} />
   </main>
-  <Footer locale={locale} />
+  <Footer locale={locale} path={path} />
 </Layout>
+
+<style>
+  .language-switch-row {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 1rem;
+  }
+</style>

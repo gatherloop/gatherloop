@@ -4,6 +4,11 @@ export const id: Dictionary = {
   backLink: {
     label: "Kembali",
   },
+  languageSwitch: {
+    ariaLabel: "Ganti bahasa",
+    id: "ID",
+    en: "EN",
+  },
   units: {
     minute: "menit",
     player: "pemain",
