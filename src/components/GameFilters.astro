@@ -1,6 +1,15 @@
 ---
 import games from "../data/games.json";
 import type { Game } from "../types";
+import { DEFAULT_LOCALE, t, type Locale } from "../i18n";
+
+interface Props {
+  locale?: Locale;
+}
+
+const { locale = DEFAULT_LOCALE } = Astro.props;
+const dict = t(locale).gameFilters;
+const tagLabels: Record<string, string> = t(locale).tags;
 
 const gameList: Game[] = games;
 
@@ -12,39 +21,48 @@ const shelves = [...new Set(gameList.map((game) => game.shelfName))].sort((a, b)
 );
 ---
 
-<section class="game-filters" id="game-filters" aria-label="Filter game" hidden>
+<section
+  class="game-filters"
+  id="game-filters"
+  aria-label={dict.panelAriaLabel}
+  hidden
+  data-filter-label={dict.filterLabel}
+  data-filter-label-template={dict.filterLabelWithCountTemplate}
+  data-count-all-template={dict.countAllTemplate}
+  data-count-filtered-template={dict.countFilteredTemplate}
+>
   <div class="filter-field">
-    <label for="filter-title" class="filter-label">Judul</label>
+    <label for="filter-title" class="filter-label">{dict.titleLabel}</label>
     <input
       type="search"
       id="filter-title"
       name="title"
       class="filter-input"
-      placeholder="🔍 Cari judul game…"
+      placeholder={dict.titlePlaceholder}
       autocomplete="off"
     />
   </div>
   <div class="filter-toolbar">
     <details class="filter-disclosure" id="filter-disclosure">
       <summary class="filter-disclosure-summary">
-        <span id="filter-disclosure-label">Filter</span>
+        <span id="filter-disclosure-label">{dict.filterLabel}</span>
         <span class="filter-disclosure-icon" aria-hidden="true"></span>
       </summary>
       <div class="filter-disclosure-content">
         <div class="filter-field">
-          <span class="filter-label" id="filter-tags-label">Tag</span>
+          <span class="filter-label" id="filter-tags-label">{dict.tagsLabel}</span>
           <div class="filter-chips" role="group" aria-labelledby="filter-tags-label" id="filter-tags">
             {
               tags.map((tag) => (
                 <button type="button" class="filter-chip" data-tag={tag} aria-pressed="false">
-                  {tag}
+                  {tagLabels[tag] ?? tag}
                 </button>
               ))
             }
           </div>
         </div>
         <div class="filter-field">
-          <label for="filter-players" class="filter-label">Jumlah pemain</label>
+          <label for="filter-players" class="filter-label">{dict.playersLabel}</label>
           <input
             type="number"
             inputmode="numeric"
@@ -52,11 +70,11 @@ const shelves = [...new Set(gameList.map((game) => game.shelfName))].sort((a, b)
             id="filter-players"
             name="pemain"
             class="filter-input"
-            placeholder="mis. 5"
+            placeholder={dict.playersPlaceholder}
           />
         </div>
         <div class="filter-field">
-          <span class="filter-label" id="filter-duration-label">Durasi</span>
+          <span class="filter-label" id="filter-duration-label">{dict.durationLabel}</span>
           <div
             class="filter-chips"
             role="group"
@@ -64,18 +82,18 @@ const shelves = [...new Set(gameList.map((game) => game.shelfName))].sort((a, b)
             id="filter-duration"
           >
             <button type="button" class="filter-chip" data-duration="0-30" aria-pressed="false">
-              ≤ 30 menit
+              {dict.durationShort}
             </button>
             <button type="button" class="filter-chip" data-duration="30-60" aria-pressed="false">
-              30–60 menit
+              {dict.durationMedium}
             </button>
             <button type="button" class="filter-chip" data-duration="60-" aria-pressed="false">
-              &gt; 60 menit
+              {dict.durationLong}
             </button>
           </div>
         </div>
         <div class="filter-field">
-          <label for="filter-age" class="filter-label">Usia pemain termuda</label>
+          <label for="filter-age" class="filter-label">{dict.ageLabel}</label>
           <input
             type="number"
             inputmode="numeric"
@@ -83,20 +101,20 @@ const shelves = [...new Set(gameList.map((game) => game.shelfName))].sort((a, b)
             id="filter-age"
             name="usia"
             class="filter-input"
-            placeholder="mis. 8"
+            placeholder={dict.agePlaceholder}
           />
         </div>
         <div class="filter-field">
-          <label for="filter-shelf" class="filter-label">Lokasi rak</label>
+          <label for="filter-shelf" class="filter-label">{dict.shelfLabel}</label>
           <select id="filter-shelf" name="shelf" class="filter-select">
-            <option value="">Semua rak</option>
+            <option value="">{dict.allShelvesOption}</option>
             {shelves.map((shelf) => <option value={shelf}>{shelf}</option>)}
           </select>
         </div>
       </div>
     </details>
     <button type="button" id="filter-reset" class="filter-reset" hidden>
-      Reset filter
+      {dict.resetLabel}
     </button>
   </div>
 </section>
@@ -138,6 +156,11 @@ const shelves = [...new Set(gameList.map((game) => game.shelfName))].sort((a, b)
     const total = cards.length;
     const validTags = new Set(tagButtons.map((button) => button.dataset.tag ?? ""));
     const validShelves = new Set(Array.from(shelfSelect.options).map((option) => option.value));
+
+    const filterLabel = panel.dataset.filterLabel ?? "Filter";
+    const filterLabelTemplate = panel.dataset.filterLabelTemplate ?? "Filter ({count})";
+    const countAllTemplate = panel.dataset.countAllTemplate ?? "{total}";
+    const countFilteredTemplate = panel.dataset.countFilteredTemplate ?? "{visible}/{total}";
 
     let title = "";
     const selectedTags = new Set<string>();
@@ -244,7 +267,11 @@ const shelves = [...new Set(gameList.map((game) => game.shelfName))].sort((a, b)
       }
 
       countEl!.textContent =
-        visible === total ? `${total} game` : `Menampilkan ${visible} dari ${total} game`;
+        visible === total
+          ? countAllTemplate.replace("{total}", String(total))
+          : countFilteredTemplate
+              .replace("{visible}", String(visible))
+              .replace("{total}", String(total));
       emptyEl!.hidden = visible !== 0;
 
       const activeCount =
@@ -253,7 +280,8 @@ const shelves = [...new Set(gameList.map((game) => game.shelfName))].sort((a, b)
         (duration !== null ? 1 : 0) +
         (age !== null ? 1 : 0) +
         (shelf !== "" ? 1 : 0);
-      disclosureLabel!.textContent = activeCount > 0 ? `Filter (${activeCount})` : "Filter";
+      disclosureLabel!.textContent =
+        activeCount > 0 ? filterLabelTemplate.replace("{count}", String(activeCount)) : filterLabel;
 
       resetButton!.hidden = title === "" && activeCount === 0;
 

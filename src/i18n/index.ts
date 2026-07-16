@@ -40,6 +40,44 @@ export interface Dictionary {
     instagramAriaLabel: string;
     tiktokAriaLabel: string;
   };
+  gamesPage: {
+    title: string;
+    description: string;
+    heading: string;
+    emptyState: string;
+  };
+  gameCard: {
+    imageAltPrefix: string;
+  };
+  gameFilters: {
+    panelAriaLabel: string;
+    titleLabel: string;
+    titlePlaceholder: string;
+    tagsLabel: string;
+    playersLabel: string;
+    playersPlaceholder: string;
+    durationLabel: string;
+    durationShort: string;
+    durationMedium: string;
+    durationLong: string;
+    ageLabel: string;
+    agePlaceholder: string;
+    shelfLabel: string;
+    allShelvesOption: string;
+    resetLabel: string;
+    filterLabel: string;
+    filterLabelWithCountTemplate: string;
+    countAllTemplate: string;
+    countFilteredTemplate: string;
+  };
+  tags: {
+    "adu strategi": string;
+    "adu cepat": string;
+    "adu ketelitian": string;
+    "game keluarga": string;
+    "kerja sama tim": string;
+    "party game": string;
+  };
 }
 
 const dictionaries: Record<Locale, Dictionary> = { id, en };
