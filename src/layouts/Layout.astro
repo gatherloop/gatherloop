@@ -1,17 +1,22 @@
 ---
 import "../styles/global.css";
 import { SITE_NAME, SITE_TITLE, SITE_DESCRIPTION } from "../consts";
-import { withBase } from "../utils/url";
-import { DEFAULT_LOCALE, type Locale } from "../i18n";
+import { withBase, localizePath } from "../utils/url";
+import { DEFAULT_LOCALE, LOCALES, type Locale } from "../i18n";
 
 interface Props {
   locale?: Locale;
+  path?: string;
   title?: string;
   description?: string;
 }
 
-const { locale = DEFAULT_LOCALE, title = SITE_TITLE[locale], description = SITE_DESCRIPTION[locale] } =
-  Astro.props;
+const {
+  locale = DEFAULT_LOCALE,
+  path = "/",
+  title = SITE_TITLE[locale],
+  description = SITE_DESCRIPTION[locale],
+} = Astro.props;
 const faviconHref = withBase("/favicon.png");
 const ogImageUrl = new URL(withBase("/images/og-image.png"), Astro.site);
 
@@ -19,20 +24,39 @@ const OG_LOCALE: Record<Locale, string> = {
   id: "id_ID",
   en: "en_US",
 };
+const otherLocale: Locale = locale === "id" ? "en" : "id";
+
+const basePath = import.meta.env.BASE_URL.replace(/\/$/, "");
 ---
 
 <!doctype html>
 <html lang={locale}>
   <head>
+    {
+      locale === DEFAULT_LOCALE && (
+        <script is:inline define:vars={{ base: basePath }}>(function(){var s;try{s=localStorage.getItem("gatherloop-lang")}catch(e){}var en=s==="en";if(!s){var l=navigator.languages||[navigator.language||""],isId=false;for(var i=0;i<l.length;i++)if(/^id/i.test(l[i])){isId=true;break}if(!isId)try{isId=/^Asia\/(Jakarta|Pontianak|Makassar|Jayapura)$/.test(Intl.DateTimeFormat().resolvedOptions().timeZone)}catch(e){}en=!isId}if(en){var p=location.pathname;if(base&&p.indexOf(base)===0)p=p.slice(base.length);location.replace(base+"/en"+p+location.search)}})();</script>
+      )
+    }
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/png" href={faviconHref} />
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={Astro.url} />
+    {
+      LOCALES.map((loc) => (
+        <link rel="alternate" hreflang={loc} href={new URL(localizePath(loc, path), Astro.site)} />
+      ))
+    }
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href={new URL(localizePath(DEFAULT_LOCALE, path), Astro.site)}
+    />
 
     <meta property="og:type" content="website" />
     <meta property="og:locale" content={OG_LOCALE[locale]} />
+    <meta property="og:locale:alternate" content={OG_LOCALE[otherLocale]} />
     <meta property="og:url" content={Astro.url} />
     <meta property="og:site_name" content={SITE_NAME} />
     <meta property="og:title" content={title} />
