@@ -44,6 +44,13 @@ export const id: Dictionary = {
   gameCard: {
     imageAltPrefix: "Box art",
   },
+  menuPage: {
+    title: "Menu Makanan & Minuman — Gatherloop",
+    description:
+      "Menu makanan dan minuman yang tersedia di Gatherloop, board game cafe di Kraksaan, Probolinggo.",
+    heading: "Menu Makanan & Minuman",
+    imageAlt: "Menu makanan dan minuman Gatherloop",
+  },
   gameFilters: {
     panelAriaLabel: "Filter game",
     titleLabel: "Judul",

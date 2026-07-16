@@ -1,11 +1,11 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import Footer from "../components/Footer.astro";
-import BackLink from "../components/BackLink.astro";
-import { withBase } from "../utils/url";
-import { DEFAULT_LOCALE, t } from "../i18n";
+import Layout from "../../layouts/Layout.astro";
+import Footer from "../../components/Footer.astro";
+import BackLink from "../../components/BackLink.astro";
+import { withBase } from "../../utils/url";
+import { t } from "../../i18n";
 
-const locale = DEFAULT_LOCALE;
+const locale = "en";
 const dict = t(locale).menuPage;
 
 // Add or remove entries to change how many menu pages are shown — no other code
