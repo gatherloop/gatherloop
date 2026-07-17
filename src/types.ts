@@ -14,3 +14,9 @@ export interface FaqItem {
   question: string;
   answer: string;
 }
+
+export interface Activity {
+  title: string;
+  description: string;
+  image: string;
+}

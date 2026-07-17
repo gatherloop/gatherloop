@@ -1,0 +1,56 @@
+{
+  "id": [
+    {
+      "title": "Main Board Game Bareng",
+      "description": "Pilih dari ratusan koleksi board game dan mainkan sepuasnya bareng keluarga, teman, atau pasangan.",
+      "image": "/images/activities/activity-1.svg"
+    },
+    {
+      "title": "Dipandu Game Master",
+      "description": "Baru pertama main atau bingung aturannya? Game master kami siap merekomendasikan dan mengajarkan cara bermain.",
+      "image": "/images/activities/activity-2.svg"
+    },
+    {
+      "title": "Ngobrol & Nongkrong Santai",
+      "description": "Gak cuma main game, kamu juga bisa nongkrong santai sambil ngobrol seru bareng orang-orang terdekat.",
+      "image": "/images/activities/activity-3.svg"
+    },
+    {
+      "title": "Nikmati Makanan & Minuman",
+      "description": "Sambil main atau nongkrong, manjakan diri dengan pilihan makanan dan minuman dari menu Gatherloop.",
+      "image": "/images/activities/activity-4.svg"
+    },
+    {
+      "title": "Rayakan Momen Spesial",
+      "description": "Ulang tahun, gathering komunitas, atau sekadar kumpul bareng — rayakan momen spesialmu di Gatherloop.",
+      "image": "/images/activities/activity-5.svg"
+    }
+  ],
+  "en": [
+    {
+      "title": "Play Board Games Together",
+      "description": "Choose from hundreds of board games and play as much as you like with family, friends, or your partner.",
+      "image": "/images/activities/activity-1.svg"
+    },
+    {
+      "title": "Get Guided by a Game Master",
+      "description": "New to a game or unsure about the rules? Our game masters are happy to recommend one and teach you how to play.",
+      "image": "/images/activities/activity-2.svg"
+    },
+    {
+      "title": "Hang Out and Chat",
+      "description": "It's not just about the games — you can also relax and catch up with the people who matter to you.",
+      "image": "/images/activities/activity-3.svg"
+    },
+    {
+      "title": "Enjoy Food & Drinks",
+      "description": "While you play or hang out, treat yourself to a bite and a drink from the Gatherloop menu.",
+      "image": "/images/activities/activity-4.svg"
+    },
+    {
+      "title": "Celebrate Special Moments",
+      "description": "A birthday, a community gathering, or just a get-together — celebrate your special moments at Gatherloop.",
+      "image": "/images/activities/activity-5.svg"
+    }
+  ]
+}

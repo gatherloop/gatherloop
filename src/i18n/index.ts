@@ -37,6 +37,13 @@ export interface Dictionary {
     menu: string;
     location: string;
   };
+  activities: {
+    ariaLabel: string;
+    sectionTitle: string;
+    prevLabel: string;
+    nextLabel: string;
+    goToSlideTemplate: string;
+  };
   faq: {
     ariaLabel: string;
     sectionTitle: string;

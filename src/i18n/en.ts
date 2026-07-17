@@ -31,6 +31,13 @@ export const en: Dictionary = {
     menu: "Food & Drink Menu",
     location: "Location",
   },
+  activities: {
+    ariaLabel: "What You Can Do Here",
+    sectionTitle: "WHAT YOU CAN DO HERE",
+    prevLabel: "Previous",
+    nextLabel: "Next",
+    goToSlideTemplate: "Go to slide {index}",
+  },
   faq: {
     ariaLabel: "Frequently Asked Questions",
     sectionTitle: "FREQUENTLY ASKED QUESTIONS",
