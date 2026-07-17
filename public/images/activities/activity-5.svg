@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-hidden="true">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FAF6F0" />
+      <stop offset="100%" stop-color="#E4DCCF" />
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="600" fill="url(#bg)" />
+
+  <!-- table -->
+  <rect x="60" y="400" width="680" height="140" rx="24" fill="#C9B79C" />
+
+  <!-- cake -->
+  <rect x="320" y="330" width="160" height="70" rx="10" fill="#FAF6F0" stroke="#0F2B63" stroke-width="3" />
+  <rect x="320" y="300" width="160" height="40" rx="10" fill="#0F2B63" opacity="0.85" />
+  <rect x="392" y="255" width="16" height="50" rx="6" fill="#26221D" />
+  <path d="M400 235 q10 15 0 25 q-10 -10 0 -25 Z" fill="#0F2B63" />
+
+  <!-- balloons -->
+  <g>
+    <circle cx="200" cy="220" r="42" fill="#0F2B63" opacity="0.85" />
+    <path d="M200 262 L200 340" stroke="#0F2B63" stroke-width="3" fill="none" />
+    <circle cx="600" cy="200" r="38" fill="#26221D" opacity="0.55" />
+    <path d="M600 238 L600 330" stroke="#26221D" stroke-width="3" fill="none" opacity="0.55" />
+  </g>
+
+  <!-- confetti -->
+  <g fill="#0F2B63" opacity="0.6">
+    <rect x="150" y="140" width="10" height="10" transform="rotate(20 150 140)" />
+    <rect x="640" y="150" width="10" height="10" transform="rotate(-15 640 150)" />
+    <circle cx="260" cy="120" r="6" />
+    <circle cx="560" cy="110" r="6" />
+  </g>
+
+  <text x="400" y="580" text-anchor="middle" font-family="sans-serif" font-size="22" fill="#26221D" opacity="0.45">
+    Placeholder — ganti dengan foto asli
+  </text>
+</svg>

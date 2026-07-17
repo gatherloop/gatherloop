@@ -31,6 +31,13 @@ export const id: Dictionary = {
     menu: "Menu Makanan & Minuman",
     location: "Lokasi",
   },
+  activities: {
+    ariaLabel: "Apa yang Bisa Kamu Lakukan di Sini",
+    sectionTitle: "APA YANG BISA KAMU LAKUKAN DI SINI",
+    prevLabel: "Sebelumnya",
+    nextLabel: "Berikutnya",
+    goToSlideTemplate: "Ke slide {index}",
+  },
   faq: {
     ariaLabel: "Pertanyaan yang Sering Ditanyakan",
     sectionTitle: "PERTANYAAN YANG SERING DITANYAKAN",

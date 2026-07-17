@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-hidden="true">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FAF6F0" />
+      <stop offset="100%" stop-color="#E4DCCF" />
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="600" fill="url(#bg)" />
+
+  <!-- table -->
+  <rect x="60" y="380" width="680" height="160" rx="24" fill="#C9B79C" />
+
+  <!-- cups -->
+  <g fill="#FAF6F0" stroke="#0F2B63" stroke-width="3">
+    <rect x="240" y="320" width="70" height="80" rx="10" />
+    <rect x="490" y="320" width="70" height="80" rx="10" />
+  </g>
+  <rect x="230" y="300" width="90" height="20" rx="10" fill="#0F2B63" />
+  <rect x="480" y="300" width="90" height="20" rx="10" fill="#0F2B63" />
+
+  <!-- chat bubbles -->
+  <g fill="#0F2B63" opacity="0.9">
+    <rect x="180" y="150" width="180" height="90" rx="24" />
+    <path d="M230 240 L215 275 L265 240 Z" />
+  </g>
+  <g fill="#FAF6F0">
+    <circle cx="230" cy="195" r="7" />
+    <circle cx="270" cy="195" r="7" />
+    <circle cx="310" cy="195" r="7" />
+  </g>
+
+  <g fill="#FAF6F0" stroke="#0F2B63" stroke-width="3">
+    <rect x="440" y="120" width="180" height="90" rx="24" />
+    <path d="M560 210 L575 245 L525 210 Z" />
+  </g>
+  <g fill="#0F2B63">
+    <circle cx="490" cy="165" r="7" />
+    <circle cx="530" cy="165" r="7" />
+    <circle cx="570" cy="165" r="7" />
+  </g>
+
+  <text x="400" y="560" text-anchor="middle" font-family="sans-serif" font-size="22" fill="#26221D" opacity="0.45">
+    Placeholder — ganti dengan foto asli
+  </text>
+</svg>
