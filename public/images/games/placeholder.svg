@@ -4,7 +4,7 @@
 
   <!-- die -->
   <g transform="translate(200,180) rotate(-8)">
-    <rect x="-70" y="-70" width="140" height="140" rx="20" fill="#1F6F54" />
+    <rect x="-70" y="-70" width="140" height="140" rx="20" fill="#0F2B63" />
     <circle cx="-32" cy="-32" r="10" fill="#FAF6F0" />
     <circle cx="32" cy="-32" r="10" fill="#FAF6F0" />
     <circle cx="0" cy="0" r="10" fill="#FAF6F0" />
