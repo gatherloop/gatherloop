@@ -2,12 +2,14 @@
 import { withBase } from "../utils/url";
 import { WHATSAPP_RESERVATION } from "../consts";
 import { DEFAULT_LOCALE, t, type Locale } from "../i18n";
+import LanguageSwitch from "./LanguageSwitch.astro";
 
 interface Props {
   locale?: Locale;
+  path: string;
 }
 
-const { locale = DEFAULT_LOCALE } = Astro.props;
+const { locale = DEFAULT_LOCALE, path } = Astro.props;
 const dict = t(locale).hero;
 
 const heroImageSrc = withBase("/images/hero.webp");
@@ -15,15 +17,17 @@ const logoSrc = withBase("/images/logo.webp");
 ---
 
 <section class="hero">
-  <div class="hero-image-wrap">
-    <img
-      class="hero-image"
-      src={heroImageSrc}
-      alt={dict.imageAlt}
-      width="960"
-      height="720"
-    />
+  <div class="hero-top">
+    <LanguageSwitch locale={locale} path={path} />
   </div>
+
+  <img
+    class="hero-image"
+    src={heroImageSrc}
+    alt={dict.imageAlt}
+    width="960"
+    height="720"
+  />
 
   <div class="brand">
     <img class="logo" src={logoSrc} alt="" />
@@ -45,8 +49,14 @@ const logoSrc = withBase("/images/logo.webp");
 
 <style>
   .hero {
-    padding-top: 1.5rem;
+    padding-top: 1rem;
     text-align: center;
+  }
+
+  .hero-top {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1rem;
   }
 
   .hero-image {
@@ -56,36 +66,15 @@ const logoSrc = withBase("/images/logo.webp");
     box-shadow: var(--shadow-card);
   }
 
-  @media (min-width: 720px) {
-    .hero-image-wrap {
-      width: 100vw;
-      position: relative;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      justify-content: center;
-    }
-
-    .hero-image {
-      max-width: 960px;
-    }
-  }
-
   .brand {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
-    margin-top: 1.25rem;
+    margin-top: 1rem;
   }
 
   .logo {
-    width: 250px;
-  }
-
-  .brand-name {
-    font-size: 1.125rem;
-    font-weight: 700;
+    width: 160px;
   }
 
   .tagline {
@@ -117,6 +106,10 @@ const logoSrc = withBase("/images/logo.webp");
   @media (min-width: 480px) {
     .tagline {
       font-size: 1.75rem;
+    }
+
+    .logo {
+      width: 180px;
     }
   }
 </style>
