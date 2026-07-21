@@ -24,6 +24,8 @@ export interface Dictionary {
     imageAlt: string;
     tagline: string;
     taglineSub: string;
+    reserveButton: string;
+    reserveAriaLabel: string;
   };
   hargaMain: {
     sectionTitle: string;

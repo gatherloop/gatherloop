@@ -1,5 +1,6 @@
 ---
 import { withBase } from "../utils/url";
+import { WHATSAPP_RESERVATION } from "../consts";
 import { DEFAULT_LOCALE, t, type Locale } from "../i18n";
 
 interface Props {
@@ -30,6 +31,16 @@ const logoSrc = withBase("/images/logo.webp");
 
   <h1 class="tagline">{dict.tagline}</h1>
   <p class="tagline-sub">{dict.taglineSub}</p>
+
+  <a
+    class="reserve-button"
+    href={WHATSAPP_RESERVATION}
+    target="_blank"
+    rel="noopener"
+    aria-label={dict.reserveAriaLabel}
+  >
+    {dict.reserveButton}
+  </a>
 </section>
 
 <style>
@@ -86,6 +97,21 @@ const logoSrc = withBase("/images/logo.webp");
   .tagline-sub {
     margin-top: 0.5rem;
     opacity: 0.85;
+  }
+
+  .reserve-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    margin-top: 1.5rem;
+    padding: 0.75rem 1.75rem;
+    border-radius: var(--radius-sm);
+    background: var(--color-accent);
+    color: var(--color-accent-contrast);
+    box-shadow: var(--shadow-card);
+    font-weight: 700;
+    text-decoration: none;
   }
 
   @media (min-width: 480px) {

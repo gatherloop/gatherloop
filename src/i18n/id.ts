@@ -18,6 +18,8 @@ export const id: Dictionary = {
     tagline: "Main Board Game Bareng Keluarga, Teman, atau Pasangan",
     taglineSub:
       "Gatherloop adalah board game pertama di probolinggo. Tempat dimana kamu bisa main board game bareng keluarga, teman, atau pasangan sambil menikmati makanan dan minuman",
+    reserveButton: "Reservasi Meja",
+    reserveAriaLabel: "Reservasi meja lewat WhatsApp",
   },
   hargaMain: {
     sectionTitle: "HARGA MAIN",

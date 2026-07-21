@@ -18,6 +18,8 @@ export const en: Dictionary = {
     tagline: "Play Board Games with Family, Friends, or Your Partner",
     taglineSub:
       "Gatherloop is the first board game cafe in Probolinggo. A place where you can play board games with family, friends, or your partner while enjoying food and drinks",
+    reserveButton: "Reserve a Table",
+    reserveAriaLabel: "Reserve a table via WhatsApp",
   },
   hargaMain: {
     sectionTitle: "PLAY RATES",
