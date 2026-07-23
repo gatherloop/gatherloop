@@ -17,24 +17,24 @@ const logoSrc = withBase("/images/logo.webp");
 ---
 
 <section class="hero">
-  <div class="hero-top">
-    <LanguageSwitch locale={locale} path={path} />
+  <div class="hero-media">
+    <img
+      class="hero-image"
+      src={heroImageSrc}
+      alt={dict.imageAlt}
+      width="960"
+      height="720"
+    />
+
+    <div class="hero-top">
+      <LanguageSwitch locale={locale} path={path} />
+    </div>
+
+    <div class="hero-overlay">
+      <img class="logo" src={logoSrc} alt="Gatherloop" />
+      <h1 class="tagline">{dict.tagline}</h1>
+    </div>
   </div>
-
-  <img
-    class="hero-image"
-    src={heroImageSrc}
-    alt={dict.imageAlt}
-    width="960"
-    height="720"
-  />
-
-  <div class="brand">
-    <img class="logo" src={logoSrc} alt="" />
-  </div>
-
-  <h1 class="tagline">{dict.tagline}</h1>
-  <p class="tagline-sub">{dict.taglineSub}</p>
 
   <a
     class="reserve-button"
@@ -45,7 +45,33 @@ const logoSrc = withBase("/images/logo.webp");
   >
     {dict.reserveButton}
   </a>
+
+  <p class="tagline-sub">{dict.taglineSub}</p>
 </section>
+
+<div class="sticky-reserve" id="sticky-reserve">
+  <a
+    class="sticky-reserve-button"
+    href={WHATSAPP_RESERVATION}
+    target="_blank"
+    rel="noopener"
+    aria-label={dict.reserveAriaLabel}
+  >
+    {dict.reserveButton}
+  </a>
+</div>
+
+<script>
+  const inlineButton = document.querySelector<HTMLElement>(".hero .reserve-button");
+  const stickyBar = document.getElementById("sticky-reserve");
+
+  if (inlineButton && stickyBar && "IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(
+      ([entry]) => stickyBar.classList.toggle("is-visible", !entry.isIntersecting),
+    );
+    observer.observe(inlineButton);
+  }
+</script>
 
 <style>
   .hero {
@@ -53,38 +79,68 @@ const logoSrc = withBase("/images/logo.webp");
     text-align: center;
   }
 
-  .hero-top {
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 1rem;
+  .hero-media {
+    position: relative;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    overflow: hidden;
   }
 
   .hero-image {
     width: 100%;
     height: auto;
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-card);
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
   }
 
-  .brand {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 1rem;
+  .hero-top {
+    position: absolute;
+    inset-block-start: 0.75rem;
+    inset-inline-end: 0.75rem;
+  }
+
+  .hero-top :global(.language-switch) {
+    padding: 0.25rem;
+    border-radius: var(--radius-sm);
+    background: rgba(15, 15, 20, 0.35);
+    backdrop-filter: blur(4px);
+  }
+
+  .hero-top :global(.language-switch-link) {
+    border-color: transparent;
+    color: #fff;
+  }
+
+  .hero-top :global(.language-switch-link[aria-current="true"]) {
+    border-color: transparent;
+  }
+
+  .hero-overlay {
+    position: absolute;
+    inset-block-end: 0;
+    inset-inline: 0;
+    padding: 3rem 1.25rem 1.25rem;
+    background: linear-gradient(to top, rgba(10, 10, 15, 0.85), rgba(10, 10, 15, 0) 75%);
   }
 
   .logo {
-    width: 160px;
+    width: 140px;
+    padding: 0.4rem 0.75rem;
+    border-radius: var(--radius-sm);
+    background: rgba(255, 255, 255, 0.92);
+    box-shadow: var(--shadow-card);
   }
 
   .tagline {
-    margin-top: 1rem;
-    font-size: 1.5rem;
+    margin-top: 0.75rem;
+    font-size: 1.35rem;
     line-height: 1.25;
+    color: #fff;
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.45);
   }
 
   .tagline-sub {
-    margin-top: 0.5rem;
+    margin-top: 1rem;
     opacity: 0.85;
   }
 
@@ -93,7 +149,7 @@ const logoSrc = withBase("/images/logo.webp");
     align-items: center;
     justify-content: center;
     min-height: 44px;
-    margin-top: 1.5rem;
+    margin-top: 1.25rem;
     padding: 0.75rem 1.75rem;
     border-radius: var(--radius-sm);
     background: var(--color-accent);
@@ -103,13 +159,57 @@ const logoSrc = withBase("/images/logo.webp");
     text-decoration: none;
   }
 
+  :global(body) {
+    padding-block-end: calc(4.5rem + env(safe-area-inset-bottom));
+  }
+
+  .sticky-reserve {
+    position: fixed;
+    inset-inline: 0;
+    inset-block-end: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    padding: 0.75rem 1rem calc(0.75rem + env(safe-area-inset-bottom));
+    background: rgba(250, 246, 240, 0.92);
+    backdrop-filter: blur(6px);
+    box-shadow: 0 -2px 10px rgba(38, 34, 29, 0.12);
+    transform: translateY(100%);
+    transition: transform 0.25s ease;
+  }
+
+  .sticky-reserve.is-visible {
+    transform: translateY(0);
+  }
+
+  .sticky-reserve-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: calc(var(--content-max-width) - 2rem);
+    min-height: 44px;
+    padding: 0.75rem 1.75rem;
+    border-radius: var(--radius-sm);
+    background: var(--color-accent);
+    color: var(--color-accent-contrast);
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sticky-reserve {
+      transition: none;
+    }
+  }
+
   @media (min-width: 480px) {
     .tagline {
       font-size: 1.75rem;
     }
 
     .logo {
-      width: 180px;
+      width: 170px;
     }
   }
 </style>
