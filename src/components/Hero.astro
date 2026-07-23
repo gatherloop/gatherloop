@@ -26,12 +26,17 @@ const logoSrc = withBase("/images/logo.webp");
       height="720"
     />
 
+    <div class="hero-scrim"></div>
+
+    <div class="hero-brand">
+      <img class="logo" src={logoSrc} alt="Gatherloop" />
+    </div>
+
     <div class="hero-top">
       <LanguageSwitch locale={locale} path={path} />
     </div>
 
     <div class="hero-overlay">
-      <img class="logo" src={logoSrc} alt="Gatherloop" />
       <h1 class="tagline">{dict.tagline}</h1>
     </div>
   </div>
@@ -93,6 +98,21 @@ const logoSrc = withBase("/images/logo.webp");
     object-fit: cover;
   }
 
+  .hero-scrim {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to bottom, rgba(10, 10, 15, 0.5), rgba(10, 10, 15, 0) 25%),
+      linear-gradient(to top, rgba(10, 10, 15, 0.85), rgba(10, 10, 15, 0) 75%);
+    pointer-events: none;
+  }
+
+  .hero-brand {
+    position: absolute;
+    inset-block-start: 0.75rem;
+    inset-inline-start: 0.75rem;
+  }
+
   .hero-top {
     position: absolute;
     inset-block-start: 0.75rem;
@@ -120,19 +140,14 @@ const logoSrc = withBase("/images/logo.webp");
     inset-block-end: 0;
     inset-inline: 0;
     padding: 3rem 1.25rem 1.25rem;
-    background: linear-gradient(to top, rgba(10, 10, 15, 0.85), rgba(10, 10, 15, 0) 75%);
   }
 
   .logo {
-    width: 140px;
-    padding: 0.4rem 0.75rem;
-    border-radius: var(--radius-sm);
-    background: rgba(255, 255, 255, 0.92);
-    box-shadow: var(--shadow-card);
+    width: 130px;
+    filter: drop-shadow(0 1px 6px rgba(0, 0, 0, 0.55));
   }
 
   .tagline {
-    margin-top: 0.75rem;
     font-size: 1.35rem;
     line-height: 1.25;
     color: #fff;
@@ -209,7 +224,7 @@ const logoSrc = withBase("/images/logo.webp");
     }
 
     .logo {
-      width: 170px;
+      width: 150px;
     }
   }
 </style>
